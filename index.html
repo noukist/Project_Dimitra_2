@@ -39,7 +39,8 @@ button{cursor:pointer;border:none;background:none;font-family:var(--sans)}
 }
 #nav.scrolled{background:rgba(13,11,56,.97);backdrop-filter:blur(12px);padding:.8rem clamp(1rem,4vw,4rem)}
 .nav-logo{display:flex;align-items:center}
-.nav-logo img{height:100px}
+.nav-logo img{height:100px;transition:height .25s ease}
+#nav.scrolled .nav-logo img{height:84px}
 .nav-links{display:flex;gap:clamp(1rem,2.5vw,2.5rem);align-items:center}
 .nav-links a{color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;transition:color .2s;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active-link{color:#fff}
@@ -1147,7 +1148,7 @@ function setLang(lang) {
   buildTestimonials();
   buildProjects();
   buildProperties();
-  document.title = lang === 'el' ? 'Menexis Constructions | Θεσσαλονίκη' : 'Menexis Constructions | Thessaloniki';
+  updateDocumentTitle();
 }
 
 function t(key) { return T[currentLang][key] || T['el'][key] || key; }
@@ -1158,6 +1159,18 @@ function applyTranslations() {
     const val = t(key);
     if(val) el.innerHTML = val;
   });
+}
+
+function updateDocumentTitle() {
+  const pageToKey = {
+    home: 'nav_home',
+    about: 'nav_about',
+    projects: 'nav_projects',
+    properties: 'nav_props',
+    contact: 'nav_contact'
+  };
+  const pageKey = pageToKey[currentPage] || 'nav_home';
+  document.title = `Menexis Constructions | ${t(pageKey)}`;
 }
 
 // ═══════════════════════════════════════════════════
@@ -1176,6 +1189,7 @@ function showPage(page) {
     buildProperties();
     // Set all logos on the newly shown page
     target.querySelectorAll('img[id*="logo"], img[id*="Logo"]').forEach(img => { img.src = LOGO_SRC; });
+    updateDocumentTitle();
   }
 }
 
