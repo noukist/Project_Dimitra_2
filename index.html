@@ -574,12 +574,14 @@ const LOGO = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/7QCcUGhvdG9zaG9
     <div class="sec-eye reveal" data-key="form_eye"></div>
     <h2 class="reveal rd1" data-key="form_h2"></h2>
     <div style="margin-top:2rem">
-      <div class="fg reveal rd1"><label class="fl" data-key="f_name"></label><input type="text" class="ff" id="f-name" required></div>
-      <div class="fg reveal rd2"><label class="fl" data-key="f_email"></label><input type="email" class="ff" id="f-email" required></div>
-      <div class="fg reveal rd3"><label class="fl" data-key="f_phone"></label><input type="tel" class="ff" id="f-phone"></div>
-      <div class="fg reveal rd4"><label class="fl" data-key="f_msg"></label><textarea class="ff" id="f-msg" rows="4" required></textarea></div>
-      <button class="fsub reveal rd4" id="fsub" onclick="submitForm()" data-key="f_send"></button>
-      <div id="form-message" style="margin-top:1rem; font-size:0.9rem;"></div>
+      <form id="contact-form" onsubmit="submitForm(event)">
+        <div class="fg reveal rd1"><label class="fl" data-key="f_name"></label><input type="text" class="ff" name="name" id="f-name" required></div>
+        <div class="fg reveal rd2"><label class="fl" data-key="f_email"></label><input type="email" class="ff" name="email" id="f-email" required></div>
+        <div class="fg reveal rd3"><label class="fl" data-key="f_phone"></label><input type="tel" class="ff" name="phone" id="f-phone"></div>
+        <div class="fg reveal rd4"><label class="fl" data-key="f_msg"></label><textarea class="ff" name="message" id="f-msg" rows="4" required></textarea></div>
+        <button type="submit" class="fsub reveal rd4" id="fsub" data-key="f_send"></button>
+        <div id="form-message" style="margin-top:1rem; font-size:0.9rem;"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -1323,14 +1325,17 @@ function initReveal() {
 // ═══════════════════════════════════════════════════
 // FORM
 // ═══════════════════════════════════════════════════
-function submitForm() {
+function submitForm(event) {
+  event.preventDefault();
+  
   const name = document.getElementById('f-name').value.trim();
   const email = document.getElementById('f-email').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const msg = document.getElementById('f-msg').value.trim();
   const messageDiv = document.getElementById('form-message');
+  const btn = document.getElementById('fsub');
 
-  if (!messageDiv) return; // Safety check
+  if (!messageDiv) return;
 
   // Validation
   if (!name) {
@@ -1349,20 +1354,44 @@ function submitForm() {
     return;
   }
 
-  // Success
-  const btn = document.getElementById('fsub') || event.target;
-  if (!btn) return; // Safety check
+  // Show sending state
   const orig = btn.textContent;
-  btn.textContent = '✓ ' + (currentLang==='el'?'Εστάλη!':currentLang==='de'?'Gesendet!':currentLang==='ru'?'Отправлено!':'Sent!');
-  btn.style.background = 'var(--indigo-lt)';
-  messageDiv.textContent = currentLang === 'el' ? 'Ευχαριστούμε! Θα επικοινωνήσουμε σύντομα.' : currentLang === 'de' ? 'Vielen Dank! Wir werden uns bald bei Ihnen melden.' : currentLang === 'ru' ? 'Спасибо! Мы свяжемся с вами в ближайшее время.' : 'Thank you! We will contact you soon.';
-  messageDiv.style.color = 'green';
-  // Clear form
-  document.getElementById('f-name').value = '';
-  document.getElementById('f-email').value = '';
-  document.getElementById('f-phone').value = '';
-  document.getElementById('f-msg').value = '';
-  setTimeout(()=>{btn.textContent=orig;btn.style.background=''; messageDiv.textContent='';}, 5000);
+  btn.textContent = currentLang === 'el' ? 'Αποστολή...' : currentLang === 'de' ? 'Wird gesendet...' : currentLang === 'ru' ? 'Отправка...' : 'Sending...';
+  btn.disabled = true;
+
+  // Send to Formspree
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      phone: phone,
+      message: msg
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      // Success
+      btn.textContent = '✓ ' + (currentLang==='el'?'Εστάλη!':currentLang==='de'?'Gesendet!':currentLang==='ru'?'Отправлено!':'Sent!');
+      btn.style.background = 'var(--indigo-lt)';
+      messageDiv.textContent = currentLang === 'el' ? 'Ευχαριστούμε! Θα επικοινωνήσουμε σύντομα.' : currentLang === 'de' ? 'Vielen Dank! Wir werden uns bald bei Ihnen melden.' : currentLang === 'ru' ? 'Спасибо! Мы свяжемся с вами в ближайшее время.' : 'Thank you! We will contact you soon.';
+      messageDiv.style.color = 'green';
+      // Clear form
+      document.getElementById('contact-form').reset();
+      setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false; messageDiv.textContent='';}, 5000);
+    } else {
+      throw new Error('Network response was not ok');
+    }
+  })
+  .catch(error => {
+    messageDiv.textContent = currentLang === 'el' ? 'Σφάλμα αποστολής. Δοκιμάστε ξανά.' : currentLang === 'de' ? 'Fehler beim Senden. Versuchen Sie es erneut.' : currentLang === 'ru' ? 'Ошибка отправки. Попробуйте еще раз.' : 'Error sending. Please try again.';
+    messageDiv.style.color = 'red';
+    btn.textContent = orig;
+    btn.disabled = false;
+  });
 }
 
 // ═══════════════════════════════════════════════════
