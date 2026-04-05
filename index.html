@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Menexis Constructions - Luxury residences in Thessaloniki since 1997">
+<title>Menexis Constructions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1B1464;--navy-deep:#0D0B38;--navy-mid:#2D2B7A;
+  --indigo:#3D3BAF;--indigo-lt:#5B59CC;--accent:#7B6FE8;
+  --white:#FFFFFF;--off-white:#F6F6FB;--light-blue:#EEF0FB;
+  --mid:#6B6B8A;--dark-text:#0D0B38;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--white);color:var(--dark-text);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:var(--sans)}
+
+/* ===== PAGE SYSTEM ===== */
+.page{display:none}
+.page.active{display:block}
+
+/* ===== NAV ===== */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem clamp(1rem,4vw,4rem);
+  transition:background .4s,padding .4s;
+}
+#nav.scrolled{background:rgba(13,11,56,.97);backdrop-filter:blur(12px);padding:.8rem clamp(1rem,4vw,4rem)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:100px}
+.nav-links{display:flex;gap:clamp(1rem,2.5vw,2.5rem);align-items:center}
+.nav-links a{color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;transition:color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active-link{color:#fff}
+.nav-cta{background:var(--indigo)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:2px;transition:background .2s!important}
+.nav-cta:hover{background:var(--indigo-lt)!important}
+.nav-lang{display:flex;gap:.4rem;align-items:center}
+.lang-btn{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:.2rem .4rem;border-radius:2px;transition:color .2s,background .2s}
+.lang-btn:hover,.lang-btn.active{color:#fff;background:rgba(123,111,232,.25)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:.5rem;z-index:210}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:.3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,11,56,.98);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;font-size:1.2rem;letter-spacing:.1em;text-transform:uppercase}
+.mobile-lang{display:flex;gap:1rem;margin-top:1rem}
+.mobile-lang button{color:rgba(255,255,255,.6);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem}
+.mobile-lang button.active{color:var(--accent)}
+
+/* ===== HERO ===== */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(1rem,2vh,2rem);overflow:hidden;background:var(--navy-deep)}
+.hero-canvas{position:absolute;inset:0;overflow:hidden}
+.geo{position:absolute}
+.geo-tr{top:-80px;right:-60px;width:clamp(200px,35vw,420px);animation:floatG 12s ease-in-out infinite}
+.geo-bl{bottom:-100px;left:-80px;width:clamp(160px,28vw,360px);animation:floatG 14s ease-in-out infinite reverse;animation-delay:4s}
+.geo-mid{top:35%;left:36%;width:clamp(240px,40vw,480px);opacity:.3;animation:floatG 10s ease-in-out infinite;animation-delay:2s}
+@keyframes floatG{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(123,111,232,1) 1px,transparent 1px),linear-gradient(90deg,rgba(123,111,232,1) 1px,transparent 1px);background-size:80px 80px}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(13,11,56,.93) 0%,rgba(13,11,56,.68) 55%,rgba(13,11,56,.2) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 clamp(1rem,4vw,4rem);max-width:820px}
+.eyebrow{font-size:.67rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;display:flex;align-items:center;gap:.9rem}
+.eyebrow::before{content:'';display:block;width:2.5rem;height:1px;background:var(--accent);flex-shrink:0}
+h1{font-family:var(--serif);font-size:clamp(2.4rem,5.5vw,5rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:1.4rem}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:clamp(.8rem,.9vw+.5rem,.95rem);line-height:1.9;color:rgba(255,255,255,.58);max-width:480px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-p{background:var(--indigo);color:#fff;padding:.95rem 2.4rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;border-radius:2px;transition:background .2s;display:inline-block}
+.btn-p:hover{background:var(--indigo-lt)}
+.btn-g{color:rgba(255,255,255,.7);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;transition:color .2s}
+.btn-g::after{content:'→';transition:transform .2s}
+.btn-g:hover{color:#fff}
+.btn-g:hover::after{transform:translateX(4px)}
+.hero-stats{position:absolute;bottom:0;right:clamp(1rem,4vw,4rem);z-index:2;display:flex;border-top:1px solid rgba(255,255,255,.06)}
+.hstat{text-align:center;padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.2vw,2.2rem);border-left:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:1px solid rgba(255,255,255,.07)}
+.hstat-n{font-family:var(--serif);font-size:clamp(1.8rem,2.8vw,2.8rem);font-weight:300;color:#fff;line-height:1}
+.hstat-n sup{font-size:60%;color:var(--accent);vertical-align:super}
+.hstat-l{font-size:.59rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:.4rem}
+
+/* ===== MARQUEE ===== */
+.mq-wrap{background:var(--navy);padding:.85rem 0;overflow:hidden}
+.mq-track{display:flex;animation:mq 22s linear infinite;width:max-content}
+.mq-item{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:500;white-space:nowrap;padding:0 2.5rem;display:flex;align-items:center;gap:2.5rem}
+.mq-dia{width:5px;height:5px;background:var(--accent);transform:rotate(45deg);flex-shrink:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SECTION UTILITIES ===== */
+.sec-pad{padding:clamp(1rem,2vw,2rem) clamp(0.5rem,1vw,1rem)}
+.sec-eye{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--indigo);margin-bottom:.9rem;display:flex;align-items:center;gap:.8rem}
+.sec-eye::before{content:'';display:block;width:2rem;height:2px;background:var(--indigo);flex-shrink:0}
+.sec-eye.light{color:var(--accent)}
+.sec-eye.light::before{background:var(--accent)}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3.2vw,2.8rem);font-weight:300;color:var(--dark-text);line-height:1.2;margin-bottom:1.4rem}
+h2 em{font-style:italic;color:var(--indigo)}
+h2.on-dark{color:#fff}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+/* ===== ABOUT ===== */
+#about-section{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(400px,70vh,85vh)}
+.about-vis{background:var(--light-blue);position:relative;overflow:hidden;min-height:400px;display:flex;align-items:center;justify-content:center}
+.about-logo-bg{width:78%;max-width:340px;position:relative;z-index:1}
+.av-geo1{position:absolute;top:-50px;right:-50px;opacity:.55}
+.av-geo2{position:absolute;bottom:-40px;left:-40px;opacity:.45}
+.about-badge{position:absolute;bottom:2rem;right:2rem;background:var(--navy);padding:1.4rem 1.8rem;z-index:2}
+.ab-year{font-family:var(--serif);font-size:clamp(2rem,3vw,3.2rem);font-weight:300;color:#fff;line-height:1}
+.ab-lbl{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.3rem}
+.about-txt{background:#fff;padding:clamp(1rem,2vw,2rem) clamp(0.5rem,1vw,1rem);display:flex;flex-direction:column;justify-content:center}
+.at{font-size:.9rem;line-height:2;color:var(--mid);margin-bottom:2.5rem}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.pillar{border-left:3px solid var(--indigo);padding-left:1rem}
+.pillar-t{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dark-text);margin-bottom:.3rem}
+.pillar-d{font-size:.8rem;color:var(--mid);line-height:1.6}
+
+/* ===== PROJECTS GRID ===== */
+#projects-section{padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem);background:var(--off-white)}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
+.view-all{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);display:flex;align-items:center;gap:.5rem;transition:gap .2s}
+.view-all::after{content:'→'}
+.view-all:hover{gap:.9rem}
+.pg{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:280px 280px;gap:3px}
+.pc{position:relative;overflow:hidden;cursor:pointer}
+.pc:first-child{grid-row:span 2}
+.pc-bg{position:absolute;inset:0;transition:transform .6s}
+.pc:hover .pc-bg{transform:scale(1.05)}
+.po{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,56,.93) 0%,rgba(13,11,56,.25) 55%,transparent 100%)}
+.pc-sil{position:absolute;bottom:0;left:0;right:0;opacity:.15;z-index:1}
+.pc-arrow{position:absolute;top:1.4rem;right:1.4rem;z-index:2;width:2.2rem;height:2.2rem;border:1px solid rgba(123,111,232,.4);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.85rem;opacity:0;transition:opacity .3s}
+.pc:hover .pc-arrow{opacity:1}
+.pc-info{position:absolute;bottom:0;left:0;right:0;padding:1.8rem 2rem;z-index:2}
+.pc-tag{display:inline-block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(123,111,232,.4);padding:.2rem .6rem;margin-bottom:.65rem}
+.pc-title{font-family:var(--serif);font-size:1.4rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:.3rem}
+.pc:first-child .pc-title{font-size:clamp(1.4rem,2vw,2rem)}
+.pc-meta{font-size:.67rem;color:rgba(255,255,255,.42)}
+.pb1{background:linear-gradient(145deg,#1a186e,#0f0e3d,#0a0929)}
+.pb2{background:linear-gradient(160deg,#23215c,#141240,#0d0c35)}
+.pb3{background:linear-gradient(145deg,#1e1c5c,#2d1a6e,#1a0f44)}
+.pb4{background:linear-gradient(155deg,#15134a,#1c1a58,#110f3d)}
+.pb5{background:linear-gradient(150deg,#1a1856,#251550,#160e42)}
+
+/* ===== NUMBERS ===== */
+#numbers-section{background:var(--navy);padding:clamp(1rem,2vw,2rem) clamp(0.5rem,1vw,1rem);display:grid;grid-template-columns:repeat(4,1fr)}
+.ni{padding:clamp(1rem,2vw,2rem) clamp(1rem,3vw,3rem);text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.ni:last-child{border-right:none}
+.ni-n{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;color:#fff;line-height:1}
+.ni-n sup{font-size:50%;color:var(--accent);vertical-align:super}
+.ni-l{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.33);margin-top:.6rem}
+
+/* ===== PROCESS ===== */
+#process-section{padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem);background:#fff;text-align:center}
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;position:relative}
+.proc::before{content:'';position:absolute;top:2.1rem;left:calc(12.5% + 1.6rem);right:calc(12.5% + 1.6rem);height:1px;background:linear-gradient(to right,var(--indigo),var(--accent),var(--indigo));opacity:.28;pointer-events:none}
+.ps{padding:0 clamp(1rem,2vw,2rem)}
+.ps-num{width:4.2rem;height:4.2rem;border-radius:50%;border:1.5px solid var(--indigo);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;position:relative;z-index:1;background:#fff;font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--indigo)}
+.ps-t{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dark-text);margin-bottom:.8rem}
+.ps-d{font-size:.82rem;line-height:1.8;color:var(--mid)}
+
+/* ===== AREAS ===== */
+#areas-section{padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem);background:var(--off-white);text-align:center}
+.ag{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:3.5rem}
+.ac{background:#fff;border:1px solid rgba(61,59,175,.12);padding:clamp(1.2rem,2vw,2rem) clamp(.8rem,1.5vw,1.5rem);text-align:center;transition:border-color .3s,transform .3s,box-shadow .3s}
+.ac:hover{border-color:var(--indigo);transform:translateY(-5px);box-shadow:0 12px 32px rgba(27,20,100,.1)}
+.ai-wrap{width:3rem;height:3rem;border-radius:50%;background:var(--light-blue);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.ai-wrap svg{width:1.3rem;height:1.3rem}
+.an{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--dark-text);margin-bottom:.3rem}
+.ad{font-size:.7rem;color:var(--mid)}
+
+/* ===== TESTIMONIALS — FIXED HEIGHT ===== */
+#testimonials-section{background:var(--navy-deep);padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem);text-align:center}
+#testimonials-section .sec-eye{justify-content:center}
+#testimonials-section h2{color:#fff;margin-bottom:0}
+.tblock{max-width:780px;margin:3rem auto 0;height:280px;position:relative;overflow:hidden}
+.t-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .5s ease;padding:0 1rem;pointer-events:none}
+.t-slide.active{opacity:1;pointer-events:auto}
+.t-stars{color:var(--accent);font-size:.9rem;letter-spacing:.2rem;margin-bottom:1rem}
+.t-q{font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.45rem);font-weight:300;font-style:italic;color:rgba(255,255,255,.88);line-height:1.75;margin-bottom:1.2rem}
+.t-a{font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.t-nav{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-top:2rem}
+.t-prev,.t-next{color:rgba(255,255,255,.4);font-size:1.2rem;transition:color .2s;padding:.3rem .6rem}
+.t-prev:hover,.t-next:hover{color:var(--accent)}
+.tdots{display:flex;gap:.6rem;align-items:center}
+.tdot{width:6px;height:6px;border-radius:50%;background:rgba(123,111,232,.25);cursor:pointer;transition:background .2s;border:none}
+.tdot.on{background:var(--accent)}
+
+/* ===== CONTACT ===== */
+#contact-section{display:grid;grid-template-columns:1fr 1fr}
+.cl{background:var(--navy);padding:clamp(1rem,2vw,2rem) clamp(0.5rem,1vw,1rem);display:flex;flex-direction:column;justify-content:center}
+.cl h2{color:#fff}
+.cd{font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.43);margin-bottom:3rem}
+.citems{display:flex;flex-direction:column;gap:1.6rem}
+.ci{display:flex;gap:1rem;align-items:flex-start}
+.ci-icon{width:2.5rem;height:2.5rem;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(123,111,232,.25);display:flex;align-items:center;justify-content:center;border-radius:2px}
+.ci-icon svg{width:1rem;height:1rem}
+.ci-l{font-size:.59rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-bottom:.25rem}
+.ci-v{font-size:.88rem;color:#fff}
+.cr{background:var(--light-blue);padding:clamp(1rem,2vw,2rem) clamp(0.5rem,1vw,1rem);display:flex;flex-direction:column;justify-content:center}
+.cr h2{color:var(--dark-text)}
+.fg{margin-bottom:1.5rem}
+.fl{display:block;font-size:.61rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.ff{width:100%;background:#fff;border:1px solid rgba(61,59,175,.18);border-radius:2px;padding:.85rem 1rem;font-family:var(--sans);font-size:.9rem;color:var(--dark-text);outline:none;transition:border-color .2s}
+.ff:focus{border-color:var(--indigo)}
+.ff::placeholder{color:#b0b0c8}
+textarea.ff{resize:none;min-height:110px}
+.fsub{background:var(--navy);color:#fff;border:none;padding:1rem 2.5rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;margin-top:.5rem;border-radius:2px;transition:background .2s}
+.fsub:hover{background:var(--indigo)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--navy-deep);padding:clamp(0.5rem,1vw,1rem) clamp(0.5rem,1vw,1rem);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap;gap:1rem}
+.fl-logo img{height:100px}
+.fc{font-size:.65rem;color:rgba(255,255,255,.2)}
+.flinks{display:flex;gap:2rem}
+.flinks a{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.27);transition:color .2s}
+.flinks a:hover{color:var(--accent)}
+
+/* ===== SUBPAGES ===== */
+.page-hero{background:var(--navy-deep);padding:clamp(6rem,12vh,10rem) clamp(1rem,4vw,4rem) clamp(3rem,6vh,5rem);position:relative;overflow:hidden}
+.page-hero-bg{position:absolute;inset:0;opacity:.08;background-image:linear-gradient(rgba(123,111,232,1) 1px,transparent 1px),linear-gradient(90deg,rgba(123,111,232,1) 1px,transparent 1px);background-size:60px 60px}
+.page-hero-content{position:relative;z-index:1}
+.page-hero h1{color:#fff;font-size:clamp(2rem,4vw,3.5rem)}
+.page-hero .eyebrow{margin-bottom:1rem}
+.page-hero p{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.9;max-width:580px;margin-top:1rem}
+.breadcrumb{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem}
+.breadcrumb span{color:var(--accent)}
+
+/* ABOUT PAGE */
+.about-story{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem)}
+.about-story-img{background:var(--light-blue);border-radius:2px;min-height:380px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,4rem);background:var(--off-white)}
+.team-card{background:#fff;padding:2rem;text-align:center;border:1px solid rgba(61,59,175,.1)}
+.team-avatar{width:5rem;height:5rem;border-radius:50%;background:var(--light-blue);border:2px solid var(--indigo);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--serif);font-size:1.5rem;color:var(--indigo)}
+.team-name{font-family:var(--serif);font-size:1.2rem;color:var(--dark-text);margin-bottom:.3rem}
+.team-role{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.team-bio{font-size:.82rem;color:var(--mid);line-height:1.7;margin-top:.8rem}
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;padding:clamp(3rem,7vw,7rem) clamp(1rem,4vw,4rem)}
+.value-card{background:#fff;padding:2rem;border-left:3px solid var(--indigo)}
+.value-icon{width:3rem;height:3rem;background:var(--light-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.value-icon svg{width:1.4rem;height:1.4rem}
+.value-t{font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dark-text);margin-bottom:.5rem}
+.value-d{font-size:.85rem;color:var(--mid);line-height:1.7}
+
+/* PROJECTS PAGE */
+.proj-filters{display:flex;gap:1rem;padding:2rem clamp(1rem,4vw,4rem);flex-wrap:wrap;background:#fff;border-bottom:1px solid rgba(61,59,175,.1)}
+.filter-btn{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;padding:.5rem 1.2rem;border-radius:2px;border:1px solid rgba(61,59,175,.2);color:var(--mid);transition:.2s}
+.filter-btn:hover,.filter-btn.on{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.proj-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,4rem)}
+.pcard{background:var(--navy-deep);position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s}
+.pcard:hover{transform:translateY(-4px)}
+.pcard-bg{position:absolute;inset:0;transition:transform .5s}
+.pcard:hover .pcard-bg{transform:scale(1.04)}
+.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,56,.9) 0%,transparent 60%)}
+.pcard-info{position:relative;z-index:1;padding:1.5rem}
+.pcard-tag{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(123,111,232,.4);padding:.2rem .5rem;display:inline-block;margin-bottom:.5rem}
+.pcard-title{font-family:var(--serif);font-size:1.2rem;font-weight:300;color:#fff;margin-bottom:.3rem}
+.pcard-meta{font-size:.65rem;color:rgba(255,255,255,.45)}
+.pcard-price{font-size:.8rem;color:var(--accent);margin-top:.3rem;font-weight:500}
+
+/* AVAILABLE PROPERTIES */
+.prop-list{padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,4rem)}
+.prop-card{display:grid;grid-template-columns:320px 1fr auto;gap:2rem;background:#fff;border:1px solid rgba(61,59,175,.1);margin-bottom:1.5rem;overflow:hidden;transition:box-shadow .3s}
+.prop-card:hover{box-shadow:0 8px 32px rgba(27,20,100,.1)}
+.prop-img{background:var(--light-blue);min-height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.prop-img svg{opacity:.2;width:60px;height:60px}
+.prop-body{padding:2rem 1rem 2rem 0}
+.prop-badge{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(123,111,232,.4);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem}
+.prop-title{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--dark-text);margin-bottom:.5rem}
+.prop-specs{display:flex;gap:1.5rem;margin:.8rem 0;flex-wrap:wrap}
+.prop-spec{font-size:.72rem;color:var(--mid);display:flex;align-items:center;gap:.4rem}
+.prop-spec svg{width:.9rem;height:.9rem;stroke:var(--indigo)}
+.prop-desc{font-size:.83rem;color:var(--mid);line-height:1.7}
+.prop-price-col{padding:2rem;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;border-left:1px solid rgba(61,59,175,.08)}
+.prop-price{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--navy)}
+.prop-sqm{font-size:.7rem;color:var(--mid);text-align:right}
+.prop-cta{background:var(--indigo);color:#fff;padding:.7rem 1.5rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;border-radius:2px;transition:background .2s;display:inline-block;text-align:center}
+.prop-cta:hover{background:var(--indigo-lt)}
+
+/* CONTACT PAGE */
+.contact-map{background:var(--light-blue);height:300px;display:flex;align-items:center;justify-content:center;border-top:3px solid var(--indigo)}
+.contact-map p{color:var(--mid);font-size:.85rem}
+.contact-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,4rem);background:var(--off-white)}
+.cinfo-card{background:#fff;padding:2rem;text-align:center;border-top:3px solid var(--indigo)}
+.cinfo-icon{width:3rem;height:3rem;background:var(--light-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.cinfo-icon svg{width:1.3rem;height:1.3rem}
+.cinfo-t{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.cinfo-v{font-family:var(--serif);font-size:1.1rem;color:var(--dark-text)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  #about-section{grid-template-columns:1fr}
+  .about-vis{min-height:280px}
+  #contact-section{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,240px)}
+  .pc:first-child{grid-row:span 2}
+  #numbers-section{grid-template-columns:repeat(2,1fr)}
+  .ni:nth-child(2){border-right:none}
+  .ni:nth-child(1),.ni:nth-child(2){border-bottom:1px solid rgba(255,255,255,.07)}
+  .ag{grid-template-columns:repeat(3,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .about-story{grid-template-columns:1fr}
+  .prop-card{grid-template-columns:1fr;grid-template-rows:auto}
+  .prop-img{min-height:180px}
+  .prop-price-col{border-left:none;border-top:1px solid rgba(61,59,175,.08);flex-direction:row;align-items:center}
+  .contact-info-grid{grid-template-columns:1fr}
+  .proc{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .proc::before{display:none}
+  .ps-num{margin-left:0}
+  .ps{text-align:left}
+  .values-grid{grid-template-columns:1fr}
+  .proj-list{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  h1{font-size:clamp(2rem,7vw,3rem)}
+  .hero-stats{position:relative;right:auto;bottom:auto;margin-top:2rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1)}
+  #hero{padding-bottom:2rem}
+  .hero-content{padding:0 1rem}
+  .pg{grid-template-columns:1fr;grid-template-rows:auto}
+  .pc{aspect-ratio:3/2}
+  .pc:first-child{grid-row:span 1}
+  .ag{grid-template-columns:repeat(2,1fr)}
+  .pillars{grid-template-columns:1fr}
+  .tblock{height:320px}
+  footer{flex-direction:column;text-align:center;gap:.8rem}
+  .flinks{flex-wrap:wrap;justify-content:center}
+  #numbers-section{grid-template-columns:repeat(2,1fr)}
+  .proj-list{grid-template-columns:1fr}
+  .prop-card{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .ag{grid-template-columns:1fr 1fr}
+  .hstat{padding:.8rem 1rem}
+  .proc{grid-template-columns:1fr}
+  .ps{margin-bottom:1.5rem}
+}
+@media(min-width:1600px){
+  .hero-content{max-width:1000px}
+  h1{font-size:5.5rem}
+}
+
+/* ===== BACK TO TOP BUTTON ===== */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s, background 0.3s, color 0.3s;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-to-top-btn.show {
+  opacity: 1;
+}
+.back-to-top-btn.blue {
+  background: var(--navy);
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGO DATA (embedded, never breaks) -->
+<script>
+const LOGO = "data:image/jpeg;base64,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bTf1X05eEe7ylfBgWgExz3nkDq7f3Gc8TD21DL6weIe3yZUxxVs0TZO278hD9bQfWYpcM9l/IN+5plenecXdyhQMYA15FSgLlLWfkqs7cnB/ysQFADbFqZ5A/KGUJZs5eHIIO8SACtmX+BREGjTYQdtDK5oJRgt5sO0Flht0yw9uiJJaePJ6twzkRZxWDQY1lmWgOCzibzFCpzftmLy2Sw9JgexFsvJliqtLyrRMbVXSuCo448MH3UgFDVgu6DrRtW+ICGdYovOfWaqnRI6sWgQzJdn2zK5VsFeV6uUANUTSZ7ssJEMOq9JsW2I00gcE0sK55rlAOExejGmIAk22XAwAUKa6s1RcjQ8HSD9ELYrlcsHACrTidIwyfN6wnOMan0aJRZLza7vlCb1rAp8s5RYAt0l1iKKFgwTiKHEhXdgdaijBHfC7wg6dX81Aim1YYWNSwssqEbKlFNL/AFGI5xsHpUvMm9VduUrzHPBfkQxLjzk4iukmBhLMRwGckn5uH7IbmupghhwPQNcYtIiqPPOkDkZ34OYlFn0YBKvrBY9cO3uZ1+DUwaK8a8245I9GjVHMO8G4lO0FF3VQFxVR1dhPIauDhKkNV04SirCr22/mPNW6lSlJuYg3w45gyIJmuLdRmAXD2gTbjtF5g4xDbtRQ9bxU4LaMOf8ApdAOANrLQGh4DtFa5InPlQiJwjj2ERbOAH7pcN2vrOKIAjY68oDafR+zhGzX9Dt4FQ3T0Y/XkzQOcpQS/LreJ7co2tu5UqV8OK97+S7CWmGfK3kvrzlSpUqVKl2bAvdz5JyglfbbNyIF8NSoihbfSeR7sAKX70n2aPkKBbQOMuSnJ+jyPm5WWL+TpsBTWT+d/9oADAMAAAERAhEAABDzzzzzzzzzzzzzzzyR1IxMr7zzzzzzzzzzzzzzwknudS/M/wA8888888888888FWjDDWRuA88888888888888WXDdsRC7088888888888888WWa886Pl888888888888888dF888T8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888w8888488w88888888tMCG84LmUAAIYA4kYC88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888880088888888888888888888sS48888888888888888888i/Ud88888888888888888wfQOlF88888888888888888ooC9V888888888888888//EACARAAMAAQQCAwAAAAAAAAAAAAABERAhMDFAIFBRYHD/2gAIAQIRAT8Q6NKJ4lIug3BsxCEUpd9uIbwhDepSl3+A8fJjkUVZW/wJRRnkKhKdBqiU8Jr95dpWVmpWV4r/AEtIhBqdNFKUbvpv/8QAIBEAAwACAgIDAQAAAAAAAAAAAAERITEQQDBBYGGxcP/aAAgBAREBPxDoJNuInl8GkhjojoNMCUeODEYTzouEqxckDc6Q/Hg8CNBu7FwILaz6PP8AiKaMAtcpgYFbHtfQdAOL8sJp0VW0uTCJaRg+hFKrZA5nIqLohJCk9EIKPhq2EPRD2NfytMyD6eyO+ILF0m6CBCEHr6WrqH//xAArEAEAAgEEAAQGAgMBAAAAAAABABEhMUFRYRBxgZEgQFChsfAwwYDR4ZD/2gAIAQAAAT8Q+hYSlkB2y9ycIPwd6+URW3K/ABrQKzbh0ZYJj14pMrl6HpP2P0LO4W/To47cS32m2es8u30r4A7w6OvtE9F7ERS8cGDw2N4RgVoEr6CXszkJ3y69+IgZrXb/AMOpUsbB3FPK9iaAw4IxisBczuvL/UqVK+fPglvoI4tV6IP07ftMF1Ry4iHVfJgizZ5NfeMYxiC3H5SgKCiVKlSvnsaOycv9Hb95iQe/3a95lGgd6saqqq7vgxjKQBVwBvMtb6NAuxtrprzG2VKlSpXz363nxD4MZq1crQcrQJvKy5n6v5c+UH6+yVKlSpUr579bz4h8GZmznM6Hfz089II84B+Vu+AzwVKlSpUr579bz4hjvcy5OAJtRBN+Z3etOb0hBhUAoDxFr3/KVK8Kl4A4Q98Pu9aylAQcZ6fPfrefEZwmNCHb/WsPgJQPYNn638Ni8L8vBUcBFD+7wdxqjMFWnXL2+nP0D9bz4CNk1RoOuHb6cwGvYf3eXt+Kx+PDNUIofoHL171LNKN63bx0Y+gkYBHbr7DuAhJlS1/t3pxz/AtPOBU/KAx/qPv5QYcYcDo+hBMxakDQvj+FwVhF4Es7y/5WCwJUaA5YxLi1YHOH+JHKuhzbS/hFAqgKrLtEFEHANUOvkNQocWvMrziq10R9wv73FOiyy7N19X6xcul4LFoiuw56jIgTC4aoCUdr7QbHipk5GDyWTMkhA0CqTFBDRboN502H2lhjvLCW4Ca1uYhkCbBtDVCq+hHEYkmgqykbrD1zC5xBwX1kWtb9HqDFwEW7ue7CGU64okpYa8BC9XkS+Ux4IYbm1ld3EQfZJ6Emm6y8Y1WLRnQ8Xn8ggJak5EnFmcRlr3oIrES0WP7gVMjhAuwTB1Vy0f6mIQ1WRo8pfk0nUwCo9tofeySzc1rW9444tFIxZ4VjO47QGXsKFMDlcyhzcXNoc0tgGmsvWac1kDSmuCUSBhRIWwO+5bZoouKGrBEvuWzzbZUgUFsZzHyOCVBqzJkpIXeCAU3QWRurVrMQW9iMArUHX9uZs+rWHKrbruDf8S+SuiZ9CUnPoh0UJnLEtqgxdAUg3RhAjVmq4iBRadDYaDT0xwdoV1PLQB5xIKoAQ1dQ3EqqHIDEvSVQXUg74Y3uWEYANO15MeftLifZ0kbaWCrt6qKXugrVtDyt9jeDZ6K4tS+OdH04mOgOUArrWZcPt8PVRUY3YUFlpQDjbfiUtfnrJqKBOMxzQ73tAc18swyxRExVgRGr1JmWHKL0HC1NowAqiAZcMJcsj3pAOimY+paoFtp9NA/MEJZLkiwFFPMtVsMFvowk/u1GSDnzlcLXU+gLwWF1dQKWTOcZhYdskK7UEjGhDUGX/ksjoHWIMiYumr1jGxwlAZDWgkIpatt294LoOYZ4YdI0wkQQxiklq1aJN4jtPbnKEigWdDXNev8A4uowGVFAG7NwJMvyO7244vWArfMrW/KLXkn0rITAeW43H9aiVjdy7Pfy0O9ZeKKgam5geywSwhQ2Jz9IZXTUc/KPwz5TFM4tw8DQOiVK8N5hXnP6NDIqkA5Vmu76Vf13evlApFTarlfgFQJvq+inQwN+vRx24jIy47Dh5O/avCy+E+AotD1NMg91+iY2jU23f4D14j0wtdvl0dEqVKleIzGydhMnq0ev0MEQWmg/29RJTXoy/TGrvxKlSpUqVKlUiC2qad0Npew6Pu39D81Cmo5rS+/4XIY6lQ607fPf/9k=";
+</script>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#" onclick="showPage('home');return false"><img id="nav-logo-img" src="img/menexis.jpg" alt="Menexis Constructions"></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('about');return false" data-key="nav_about"></a></li>
+    <li><a href="#" onclick="showPage('projects');return false" data-key="nav_projects"></a></li>
+    <li><a href="#" onclick="showPage('properties');return false" data-key="nav_props"></a></li>
+    <li><a href="#" onclick="showPage('contact');return false" class="nav-cta" data-key="nav_contact"></a></li>
+    <li class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('el')">ΕΛ</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </li>
+  </ul>
+  <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showPage('home');toggleMenu();return false" data-key="nav_home"></a>
+  <a href="#" onclick="showPage('about');toggleMenu();return false" data-key="nav_about"></a>
+  <a href="#" onclick="showPage('projects');toggleMenu();return false" data-key="nav_projects"></a>
+  <a href="#" onclick="showPage('properties');toggleMenu();return false" data-key="nav_props"></a>
+  <a href="#" onclick="showPage('contact');toggleMenu();return false" data-key="nav_contact"></a>
+  <div class="mobile-lang">
+    <button onclick="setLang('el');toggleMenu()">ΕΛ</button>
+    <button onclick="setLang('en');toggleMenu()">EN</button>
+    <button onclick="setLang('de');toggleMenu()">DE</button>
+    <button onclick="setLang('ru');toggleMenu()">RU</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE: HOME -->
+<!-- ═══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-canvas">
+    <div class="hero-grid"></div>
+    <svg class="geo geo-tr" viewBox="0 0 420 420" fill="none">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7B6FE8"/><stop offset="100%" stop-color="#1B1464"/></linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5B59CC"/><stop offset="100%" stop-color="#3D3BAF"/></linearGradient>
+      </defs>
+      <polygon points="420,0 420,290 130,0" fill="url(#g1)" opacity="0.6"/>
+      <polygon points="420,0 270,0 420,140" fill="url(#g2)" opacity="0.45"/>
+    </svg>
+    <svg class="geo geo-bl" viewBox="0 0 360 360" fill="none">
+      <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2D2B7A"/><stop offset="100%" stop-color="#0D0B38"/></linearGradient></defs>
+      <ellipse cx="100" cy="260" rx="160" ry="110" fill="url(#g3)" opacity="0.65"/>
+    </svg>
+    <svg class="geo geo-mid" viewBox="0 0 480 480" fill="none">
+      <path d="M80 400 L80 140 L240 290 L400 140 L400 400" stroke="rgba(123,111,232,0.3)" stroke-width="2" fill="none"/>
+      <path d="M50 400 L50 110 L240 270 L430 110 L430 400" stroke="rgba(91,89,204,0.15)" stroke-width="1" fill="none"/>
+      <circle cx="240" cy="240" r="180" stroke="rgba(91,89,204,0.07)" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="eyebrow" data-key="hero_eyebrow"></div>
+    <h1 data-key="hero_h1_raw"></h1>
+    <p class="hero-sub" data-key="hero_sub"></p>
+    <div class="hero-btns">
+      <a href="#" class="btn-p" onclick="showPage('projects');return false" data-key="hero_btn1"></a>
+      <a href="#" class="btn-g" onclick="showPage('about');return false" data-key="hero_btn2"></a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">27<sup>+</sup></div><div class="hstat-l" data-key="stat1"></div></div>
+    <div class="hstat"><div class="hstat-n">80<sup>+</sup></div><div class="hstat-l" data-key="stat2"></div></div>
+    <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l" data-key="stat3"></div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap"><div class="mq-track" id="mq-track"></div></div>
+
+<!-- ABOUT STRIP -->
+<section id="about-section">
+  <div class="about-vis">
+    <img class="about-logo-bg" id="about-logo" src="img/menexis.jpg" alt="Menexis Constructions">
+    <svg class="av-geo1" width="230" height="230" viewBox="0 0 230 230" fill="none">
+      <defs><linearGradient id="ag1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5B59CC"/><stop offset="100%" stop-color="#2D2B7A"/></linearGradient></defs>
+      <polygon points="230,0 230,190 40,0" fill="url(#ag1)"/>
+    </svg>
+    <svg class="av-geo2" width="170" height="170" viewBox="0 0 170 170" fill="none">
+      <defs><linearGradient id="ag2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1B1464"/><stop offset="100%" stop-color="#3D3BAF"/></linearGradient></defs>
+      <ellipse cx="60" cy="110" rx="90" ry="65" fill="url(#ag2)"/>
+    </svg>
+    <div class="about-badge"><div class="ab-year">1997</div><div class="ab-lbl" data-key="badge_lbl"></div></div>
+  </div>
+  <div class="about-txt">
+    <div class="sec-eye reveal" data-key="about_eye"></div>
+    <h2 class="reveal rd1" data-key="about_h2"></h2>
+    <p class="at reveal rd2" data-key="about_p"></p>
+    <div class="pillars reveal rd3">
+      <div class="pillar"><div class="pillar-t" data-key="p1_t"></div><div class="pillar-d" data-key="p1_d"></div></div>
+      <div class="pillar"><div class="pillar-t" data-key="p2_t"></div><div class="pillar-d" data-key="p2_d"></div></div>
+      <div class="pillar"><div class="pillar-t" data-key="p3_t"></div><div class="pillar-d" data-key="p3_d"></div></div>
+      <div class="pillar"><div class="pillar-t" data-key="p4_t"></div><div class="pillar-d" data-key="p4_d"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS PREVIEW -->
+<section id="projects-section">
+  <div class="sec-hd">
+    <div><div class="sec-eye reveal" data-key="proj_eye"></div><h2 class="reveal rd1" data-key="proj_h2"></h2></div>
+    <a href="#" class="view-all reveal rd2" onclick="showPage('projects');return false" data-key="view_all"></a>
+  </div>
+  <div class="pg reveal rd1">
+    <div class="pc"><div class="pc-bg pb1"><svg class="pc-sil" viewBox="0 0 400 280" height="280" fill="none"><rect x="40" y="60" width="80" height="220" fill="#7B6FE8"/><rect x="140" y="100" width="60" height="180" fill="#5B59CC"/><rect x="220" y="30" width="100" height="250" fill="#7B6FE8"/><rect x="340" y="80" width="50" height="200" fill="#5B59CC"/><rect x="53" y="78" width="10" height="182" fill="rgba(0,0,0,0.22)"/><rect x="73" y="78" width="10" height="182" fill="rgba(0,0,0,0.22)"/><rect x="233" y="48" width="12" height="200" fill="rgba(0,0,0,0.22)"/><rect x="256" y="48" width="12" height="200" fill="rgba(0,0,0,0.22)"/></svg></div><div class="po"></div><div class="pc-arrow">→</div><div class="pc-info"><div class="pc-tag" data-key="pr1_tag"></div><div class="pc-title" data-key="pr1_title"></div><div class="pc-meta" data-key="pr1_meta"></div></div></div>
+    <div class="pc"><div class="pc-bg pb2"><svg class="pc-sil" viewBox="0 0 300 220" height="220" fill="none"><rect x="20" y="40" width="260" height="180" fill="#5B59CC"/><path d="M20 40 Q150 0 280 40" fill="#7B6FE8"/><rect x="40" y="70" width="30" height="120" fill="rgba(0,0,0,0.25)"/><rect x="82" y="70" width="30" height="120" fill="rgba(0,0,0,0.25)"/></svg></div><div class="po"></div><div class="pc-arrow">→</div><div class="pc-info"><div class="pc-tag" data-key="pr2_tag"></div><div class="pc-title" data-key="pr2_title"></div><div class="pc-meta" data-key="pr2_meta"></div></div></div>
+    <div class="pc"><div class="pc-bg pb3"><svg class="pc-sil" viewBox="0 0 300 220" height="220" fill="none"><rect x="50" y="20" width="200" height="200" fill="#3D3BAF"/><rect x="70" y="40" width="25" height="35" fill="rgba(123,111,232,0.4)"/><rect x="105" y="40" width="25" height="35" fill="rgba(123,111,232,0.4)"/><rect x="70" y="90" width="25" height="35" fill="rgba(123,111,232,0.4)"/><rect x="105" y="90" width="25" height="35" fill="rgba(123,111,232,0.4)"/></svg></div><div class="po"></div><div class="pc-arrow">→</div><div class="pc-info"><div class="pc-tag" data-key="pr3_tag"></div><div class="pc-title" data-key="pr3_title"></div><div class="pc-meta" data-key="pr3_meta"></div></div></div>
+    <div class="pc"><div class="pc-bg pb4"></div><div class="po"></div><div class="pc-arrow">→</div><div class="pc-info"><div class="pc-tag" data-key="pr4_tag"></div><div class="pc-title" data-key="pr4_title"></div><div class="pc-meta" data-key="pr4_meta"></div></div></div>
+    <div class="pc"><div class="pc-bg pb5"></div><div class="po"></div><div class="pc-arrow">→</div><div class="pc-info"><div class="pc-tag" data-key="pr5_tag"></div><div class="pc-title" data-key="pr5_title"></div><div class="pc-meta" data-key="pr5_meta"></div></div></div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div id="numbers-section">
+  <div class="ni reveal"><div class="ni-n">27<sup>+</sup></div><div class="ni-l" data-key="stat1"></div></div>
+  <div class="ni reveal rd1"><div class="ni-n">80<sup>+</sup></div><div class="ni-l" data-key="stat2"></div></div>
+  <div class="ni reveal rd2"><div class="ni-n">500<sup>+</sup></div><div class="ni-l" data-key="stat4"></div></div>
+  <div class="ni reveal rd3"><div class="ni-n">6</div><div class="ni-l" data-key="stat3"></div></div>
+</div>
+
+<!-- PROCESS -->
+<section id="process-section">
+  <div class="sec-eye reveal" style="justify-content:center" data-key="proc_eye"></div>
+  <h2 class="reveal rd1" data-key="proc_h2"></h2>
+  <div class="proc">
+    <div class="ps reveal rd1"><div class="ps-num">01</div><div class="ps-t" data-key="s1_t"></div><p class="ps-d" data-key="s1_d"></p></div>
+    <div class="ps reveal rd2"><div class="ps-num">02</div><div class="ps-t" data-key="s2_t"></div><p class="ps-d" data-key="s2_d"></p></div>
+    <div class="ps reveal rd3"><div class="ps-num">03</div><div class="ps-t" data-key="s3_t"></div><p class="ps-d" data-key="s3_d"></p></div>
+    <div class="ps reveal rd4"><div class="ps-num">04</div><div class="ps-t" data-key="s4_t"></div><p class="ps-d" data-key="s4_d"></p></div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section id="areas-section">
+  <div class="sec-eye reveal" style="justify-content:center" data-key="areas_eye"></div>
+  <h2 class="reveal rd1" data-key="areas_h2"></h2>
+  <div class="ag">
+    <div class="ac reveal rd1"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="15" stroke="#3D3BAF" stroke-width="1.5"/><path d="M3 7L12 2L21 7" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an">Καλαμαριά</div><div class="ad" data-key="area1_d"></div></div>
+    <div class="ac reveal rd2"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="11" width="10" height="11" stroke="#3D3BAF" stroke-width="1.5"/><rect x="12" y="6" width="10" height="16" stroke="#3D3BAF" stroke-width="1.5"/><line x1="1" y1="22" x2="23" y2="22" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="an">Θέρμη</div><div class="ad" data-key="area2_d"></div></div>
+    <div class="ac reveal rd3"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="18" stroke="#3D3BAF" stroke-width="1.5"/><rect x="7" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="7" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/></svg></div><div class="an">Ωραιόκαστρο</div><div class="ad" data-key="area3_d"></div></div>
+    <div class="ac reveal rd4"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M3 22L3 9L12 3L21 9L21 22" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an">Εύοσμος</div><div class="ad" data-key="area4_d"></div></div>
+    <div class="ac reveal rd4"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="#3D3BAF" stroke-width="1.5"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="an" data-key="area5_n"></div><div class="ad" data-key="area5_d"></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS — FIXED HEIGHT -->
+<section id="testimonials-section">
+  <div class="sec-eye light reveal" style="justify-content:center" data-key="test_eye"></div>
+  <h2 class="on-dark reveal rd1" data-key="test_h2"></h2>
+  <div class="tblock" id="tblock">
+    <!-- slides injected by JS -->
+  </div>
+  <div class="t-nav">
+    <button class="t-prev" onclick="moveT(-1)">←</button>
+    <div class="tdots" id="tdots"></div>
+    <button class="t-next" onclick="moveT(1)">→</button>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section id="contact-section">
+  <div class="cl">
+    <div class="sec-eye light reveal" data-key="cont_eye"></div>
+    <h2 class="on-dark reveal rd1" data-key="cont_h2"></h2>
+    <p class="cd reveal rd2" data-key="cont_desc"></p>
+    <div class="citems reveal rd3">
+      <div class="ci"><div class="ci-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6C3.5 9.5 8 14.5 8 14.5C8 14.5 12.5 9.5 12.5 6C12.5 3.5 10.5 1.5 8 1.5Z" stroke="#7B6FE8" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#7B6FE8" stroke-width="1.2"/></svg></div><div><div class="ci-l" data-key="c_addr_l"></div><div class="ci-v">Ιουστινιανού 11, Καλαμαριά, 55134</div></div></div>
+      <div class="ci"><div class="ci-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h2.5l1 3-1.5 1.5a8.5 8.5 0 004.5 4.5L11 9.5l3 1V13a2 2 0 01-2 2C5.5 15 1 10.5 1 4a2 2 0 012-2z" stroke="#7B6FE8" stroke-width="1.2"/></svg></div><div><div class="ci-l" data-key="c_phone_l"></div><div class="ci-v">+30 231 000 0000</div></div></div>
+      <div class="ci"><div class="ci-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1" stroke="#7B6FE8" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="#7B6FE8" stroke-width="1.2"/></svg></div><div><div class="ci-l" data-key="c_email_l"></div><div class="ci-v">info@menexisconstructions.gr</div></div></div>
+    </div>
+  </div>
+  <div class="cr">
+    <div class="sec-eye reveal" data-key="form_eye"></div>
+    <h2 class="reveal rd1" data-key="form_h2"></h2>
+    <div style="margin-top:2rem">
+      <div class="fg reveal rd1"><label class="fl" data-key="f_name"></label><input type="text" class="ff" id="f-name" required></div>
+      <div class="fg reveal rd2"><label class="fl" data-key="f_email"></label><input type="email" class="ff" id="f-email" required></div>
+      <div class="fg reveal rd3"><label class="fl" data-key="f_phone"></label><input type="tel" class="ff" id="f-phone"></div>
+      <div class="fg reveal rd4"><label class="fl" data-key="f_msg"></label><textarea class="ff" id="f-msg" rows="4" required></textarea></div>
+      <button class="fsub reveal rd4" id="fsub" onclick="submitForm()" data-key="f_send"></button>
+      <div id="form-message" style="margin-top:1rem; font-size:0.9rem;"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl-logo"><img id="footer-logo" src="img/menexis.jpg" alt="Menexis Constructions"></div>
+  <ul class="flinks">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('about');return false" data-key="nav_about"></a></li>
+    <li><a href="#" onclick="showPage('projects');return false" data-key="nav_projects"></a></li>
+    <li><a href="#" onclick="showPage('contact');return false" data-key="nav_contact"></a></li>
+  </ul>
+  <div class="fc" data-key="footer_copy"></div>
+</footer>
+
+</div><!-- end page-home -->
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE: ABOUT -->
+<!-- ═══════════════════════════════════════ -->
+<div id="page-about" class="page">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><span data-key="nav_home"></span> / <span data-key="nav_about"></span></div>
+    <div class="eyebrow" data-key="about_eye"></div>
+    <h1 class="page-hero" data-key="about_page_h1"></h1>
+    <p data-key="about_page_sub"></p>
+  </div>
+</div>
+<section class="about-story">
+  <div>
+    <div class="sec-eye" data-key="story_eye"></div>
+    <h2 data-key="story_h2"></h2>
+    <p style="font-size:.9rem;line-height:2;color:var(--mid);margin-bottom:1.5rem" data-key="story_p1"></p>
+    <p style="font-size:.9rem;line-height:2;color:var(--mid)" data-key="story_p2"></p>
+  </div>
+  <div class="about-story-img">
+    <svg viewBox="0 0 200 240" fill="none" width="160" style="opacity:.18">
+      <rect x="20" y="40" width="160" height="200" stroke="#3D3BAF" stroke-width="1.5"/>
+      <path d="M20 40 Q100 0 180 40" stroke="#3D3BAF" stroke-width="1.5" fill="none"/>
+      <rect x="40" y="70" width="35" height="45" stroke="#3D3BAF" stroke-width="1"/>
+      <rect x="90" y="70" width="35" height="45" stroke="#3D3BAF" stroke-width="1"/>
+      <rect x="40" y="130" width="35" height="45" stroke="#3D3BAF" stroke-width="1"/>
+      <rect x="90" y="130" width="35" height="45" stroke="#3D3BAF" stroke-width="1"/>
+      <rect x="65" y="195" width="40" height="45" stroke="#3D3BAF" stroke-width="1"/>
+      <line x1="10" y1="240" x2="190" y2="240" stroke="#3D3BAF" stroke-width="1.5"/>
+    </svg>
+    <div class="about-badge" style="bottom:2rem;right:2rem;position:absolute"><div class="ab-year">1997</div><div class="ab-lbl" data-key="badge_lbl"></div></div>
+  </div>
+</section>
+<section style="background:var(--navy);padding:clamp(3rem,6vw,6rem) clamp(1rem,4vw,4rem)">
+  <div class="sec-eye light" style="justify-content:center" data-key="team_eye"></div>
+  <h2 class="on-dark" style="text-align:center" data-key="team_h2"></h2>
+  <div class="team-grid" style="background:transparent;padding-top:3rem">
+    <div class="team-card" style="background:rgba(255,255,255,.04);border-color:rgba(123,111,232,.2)">
+      <div class="team-avatar" style="background:rgba(123,111,232,.15);border-color:var(--accent);color:var(--accent)">ΓΜ</div>
+      <div class="team-name" style="color:#fff">Μενέξης Γιώργος</div>
+      <div class="team-role" data-key="team1_role"></div>
+      <div class="team-bio" style="color:rgba(255,255,255,.5)" data-key="team1_bio"></div>
+    </div>
+    <div class="team-card" style="background:rgba(255,255,255,.04);border-color:rgba(123,111,232,.2)">
+      <div class="team-avatar" style="background:rgba(123,111,232,.15);border-color:var(--accent);color:var(--accent)">ΑΜ</div>
+      <div class="team-name" style="color:#fff" data-key="team2_name"></div>
+      <div class="team-role" data-key="team2_role"></div>
+      <div class="team-bio" style="color:rgba(255,255,255,.5)" data-key="team2_bio"></div>
+    </div>
+    <div class="team-card" style="background:rgba(255,255,255,.04);border-color:rgba(123,111,232,.2)">
+      <div class="team-avatar" style="background:rgba(123,111,232,.15);border-color:var(--accent);color:var(--accent)">ΝΚ</div>
+      <div class="team-name" style="color:#fff" data-key="team3_name"></div>
+      <div class="team-role" data-key="team3_role"></div>
+      <div class="team-bio" style="color:rgba(255,255,255,.5)" data-key="team3_bio"></div>
+    </div>
+  </div>
+</section>
+<section style="padding:clamp(3rem,6vw,6rem) clamp(1rem,4vw,4rem)">
+  <div class="sec-eye" style="justify-content:center" data-key="val_eye"></div>
+  <h2 style="text-align:center" data-key="val_h2"></h2>
+  <div class="values-grid" style="padding:3rem 0 0">
+    <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="value-t" data-key="v1_t"></div><div class="value-d" data-key="v1_d"></div></div>
+    <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="value-t" data-key="v2_t"></div><div class="value-d" data-key="v2_d"></div></div>
+    <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="value-t" data-key="v3_t"></div><div class="value-d" data-key="v3_d"></div></div>
+    <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#3D3BAF" stroke-width="1.5"/><polyline points="9 22 9 12 15 12 15 22" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="value-t" data-key="v4_t"></div><div class="value-d" data-key="v4_d"></div></div>
+  </div>
+</section>
+<footer>
+  <div class="fl-logo"><img id="footer-logo-about" src="img/menexis.jpg" alt="Menexis Constructions"></div>
+  <ul class="flinks">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('projects');return false" data-key="nav_projects"></a></li>
+    <li><a href="#" onclick="showPage('contact');return false" data-key="nav_contact"></a></li>
+  </ul>
+  <div class="fc" data-key="footer_copy"></div>
+</footer>
+</div><!-- end page-about -->
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE: PROJECTS -->
+<!-- ═══════════════════════════════════════ -->
+<div id="page-projects" class="page">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><span data-key="nav_home"></span> / <span data-key="nav_projects"></span></div>
+    <div class="eyebrow" data-key="proj_eye"></div>
+    <h1 class="page-hero" data-key="proj_page_h1"></h1>
+    <p data-key="proj_page_sub"></p>
+  </div>
+</div>
+<div class="proj-filters">
+  <button class="filter-btn on" onclick="filterProj('all',this)" data-key="f_all"></button>
+  <button class="filter-btn" onclick="filterProj('thermi',this)">Θέρμη</button>
+  <button class="filter-btn" onclick="filterProj('kalamaria',this)">Καλαμαριά</button>
+  <button class="filter-btn" onclick="filterProj('oreokastro',this)">Ωραιόκαστρο</button>
+  <button class="filter-btn" onclick="filterProj('evosmos',this)">Εύοσμος</button>
+  <button class="filter-btn" onclick="filterProj('completed',this)" data-key="f_completed"></button>
+  <button class="filter-btn" onclick="filterProj('ongoing',this)" data-key="f_ongoing"></button>
+</div>
+<div class="proj-list" id="proj-list"></div>
+<footer>
+  <div class="fl-logo"><img id="footer-logo-proj" src="img/menexis.jpg" alt="Menexis Constructions"></div>
+  <ul class="flinks">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('properties');return false" data-key="nav_props"></a></li>
+    <li><a href="#" onclick="showPage('contact');return false" data-key="nav_contact"></a></li>
+  </ul>
+  <div class="fc" data-key="footer_copy"></div>
+</footer>
+</div><!-- end page-projects -->
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE: AVAILABLE PROPERTIES -->
+<!-- ═══════════════════════════════════════ -->
+<div id="page-properties" class="page">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><span data-key="nav_home"></span> / <span data-key="nav_props"></span></div>
+    <div class="eyebrow" data-key="props_eye"></div>
+    <h1 class="page-hero" data-key="props_page_h1"></h1>
+    <p data-key="props_page_sub"></p>
+  </div>
+</div>
+<div class="proj-filters">
+  <button class="filter-btn on" data-key="f_all"></button>
+  <button class="filter-btn">Θέρμη</button>
+  <button class="filter-btn">Καλαμαριά</button>
+  <button class="filter-btn" data-key="f_apt"></button>
+  <button class="filter-btn" data-key="f_mais"></button>
+</div>
+<div class="prop-list" id="prop-list"></div>
+<footer>
+  <div class="fl-logo"><img id="footer-logo-props" src="img/menexis.jpg" alt="Menexis Constructions"></div>
+  <ul class="flinks">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('projects');return false" data-key="nav_projects"></a></li>
+    <li><a href="#" onclick="showPage('contact');return false" data-key="nav_contact"></a></li>
+  </ul>
+  <div class="fc" data-key="footer_copy"></div>
+</footer>
+</div><!-- end page-properties -->
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE: CONTACT -->
+<!-- ═══════════════════════════════════════ -->
+<div id="page-contact" class="page">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><span data-key="nav_home"></span> / <span data-key="nav_contact"></span></div>
+    <div class="eyebrow" data-key="cont_eye"></div>
+    <h1 class="page-hero" data-key="cont_page_h1"></h1>
+    <p data-key="cont_page_sub"></p>
+  </div>
+</div>
+<div class="contact-info-grid">
+  <div class="cinfo-card"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#3D3BAF" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="cinfo-t" data-key="c_addr_l"></div><div class="cinfo-v">Ιουστινιανού 11<br>Καλαμαριά, 55134</div></div>
+  <div class="cinfo-card"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="cinfo-t" data-key="c_phone_l"></div><div class="cinfo-v">+30 231 000 0000<br>+30 694 000 0000</div></div>
+  <div class="cinfo-card"><div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#3D3BAF" stroke-width="1.5"/><path d="M2 7l10 7 10-7" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="cinfo-t" data-key="c_email_l"></div><div class="cinfo-v">info@menexisconstructions.gr</div></div>
+</div>
+<div class="contact-map">
+  <p style="color:var(--mid);font-size:.85rem;text-align:center">📍 Ιουστινιανού 11, Καλαμαριά, Θεσσαλονίκη<br><small style="opacity:.6" data-key="map_note"></small></p>
+</div>
+<section id="contact-section" style="display:grid;grid-template-columns:1fr 1fr">
+  <div class="cl">
+    <div class="sec-eye light" data-key="cont_eye"></div>
+    <h2 class="on-dark" data-key="cont_h2"></h2>
+    <p class="cd" data-key="cont_desc"></p>
+    <div class="citems">
+      <div class="ci"><div class="ci-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h2.5l1 3-1.5 1.5a8.5 8.5 0 004.5 4.5L11 9.5l3 1V13a2 2 0 01-2 2C5.5 15 1 10.5 1 4a2 2 0 012-2z" stroke="#7B6FE8" stroke-width="1.2"/></svg></div><div><div class="ci-l" data-key="c_hours_l"></div><div class="ci-v" data-key="c_hours_v"></div></div></div>
+      <div class="ci"><div class="ci-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1" stroke="#7B6FE8" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="#7B6FE8" stroke-width="1.2"/></svg></div><div><div class="ci-l">Social Media</div><div class="ci-v">@menexis.constructions</div></div></div>
+    </div>
+  </div>
+  <div class="cr">
+    <div class="sec-eye" data-key="form_eye"></div>
+    <h2 data-key="form_h2"></h2>
+    <div style="margin-top:2rem">
+      <div class="fg"><label class="fl" data-key="f_name"></label><input type="text" class="ff"></div>
+      <div class="fg"><label class="fl" data-key="f_email"></label><input type="email" class="ff"></div>
+      <div class="fg"><label class="fl" data-key="f_phone"></label><input type="tel" class="ff"></div>
+      <div class="fg"><label class="fl" data-key="f_interest"></label>
+        <select class="ff" style="appearance:none">
+          <option data-key="fi_buy"></option>
+          <option data-key="fi_invest"></option>
+          <option data-key="fi_info"></option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl" data-key="f_msg"></label><textarea class="ff" rows="4"></textarea></div>
+      <button class="fsub" onclick="submitForm()" data-key="f_send"></button>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="fl-logo"><img id="footer-logo-contact" src="img/menexis.jpg" alt="Menexis Constructions"></div>
+  <ul class="flinks">
+    <li><a href="#" onclick="showPage('home');return false" data-key="nav_home"></a></li>
+    <li><a href="#" onclick="showPage('projects');return false" data-key="nav_projects"></a></li>
+    <li><a href="#" onclick="showPage('properties');return false" data-key="nav_props"></a></li>
+  </ul>
+  <div class="fc" data-key="footer_copy"></div>
+</footer>
+</div><!-- end page-contact -->
+
+<script>
+// ═══════════════════════════════════════════════════
+// LOGO — EMBEDDED, NEVER BREAKS
+// ═══════════════════════════════════════════════════
+const LOGO_SRC = './img/menexis.jpg';
+document.querySelectorAll('img[id*="logo"], img[id*="Logo"]').forEach(img => { img.src = LOGO_SRC; });
+// also set by id specifically
+['nav-logo-img','about-logo','footer-logo','footer-logo-about','footer-logo-proj','footer-logo-props','footer-logo-contact'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.src = LOGO_SRC;
+  console.log(el);
+});
+
+// ═══════════════════════════════════════════════════
+// TRANSLATIONS
+// ═══════════════════════════════════════════════════
+const T = {
+  el: {
+    nav_home:'Αρχική', nav_about:'Η Εταιρεία', nav_projects:'Έργα', nav_props:'Διαθέσιμες Κατοικίες', nav_contact:'Επικοινωνία',
+    hero_eyebrow:'Κατασκευαστική Αριστεία από το 1997',
+    hero_h1_raw:'Χτίζουμε<br><em>Πολυτελείς</em><br>Κατοικίες',
+    hero_sub:'Από τη Θεσσαλονίκη στη Θέρμη και πέρα — σχεδιάζουμε χώρους που συνδυάζουν αρχιτεκτονική τελειότητα με σύγχρονη ζωή.',
+    hero_btn1:'Δείτε τα Έργα μας', hero_btn2:'Η Ιστορία μας',
+    stat1:'Χρόνια Εμπειρίας', stat2:'Ολοκληρωμένα Έργα', stat3:'Περιοχές Δράσης', stat4:'Ευτυχισμένες Οικογένειες',
+    badge_lbl:'Ίδρυση Εταιρείας',
+    about_eye:'Η Εταιρεία', about_h2:'Αριστεία στην<br><em>Κατασκευή</em>',
+    about_p:'Από το 1997, η Menexis Constructions αποτελεί συνώνυμο της ποιότητας και της αξιοπιστίας στον κατασκευαστικό κλάδο της Θεσσαλονίκης. Με δεκάδες ολοκληρωμένα κτίρια και συγκροτήματα πολυτελών κατοικιών, δεσμευόμαστε σε κάθε λεπτομέρεια.',
+    p1_t:'Αρχιτεκτονική', p1_d:'Σύγχρονος σχεδιασμός που αναδεικνύει αισθητική και λειτουργικότητα.',
+    p2_t:'Ποιότητα', p2_d:'Επιλεγμένα υλικά και αδιάλειπτος ποιοτικός έλεγχος σε κάθε φάση.',
+    p3_t:'Αξιοπιστία', p3_d:'Σεβόμαστε τα χρονοδιαγράμματα και τις συμφωνίες μας απόλυτα.',
+    p4_t:'Αξία', p4_d:'Κατοικίες που εκτιμώνται στον χρόνο — επένδυση για ζωή.',
+    proj_eye:'Χαρτοφυλάκιο', proj_h2:'Επιλεγμένα <em>Έργα</em>', view_all:'Δείτε Όλα',
+    pr1_tag:'Θέρμη · 2024', pr1_title:'Residence Thermi Grand', pr1_meta:'245 τ.μ. · Maisonette · 4 Δωμάτια · €500.000',
+    pr2_tag:'Καλαμαριά · 2024', pr2_title:'Kalamaria Prestige', pr2_meta:'175 τ.μ. · Διαμέρισμα · €430.000',
+    pr3_tag:'Θέρμη · 2024', pr3_title:'Sky Loft Thermi', pr3_meta:'120 τ.μ. · 7ος Όροφος · €420.000',
+    pr4_tag:'Ωραιόκαστρο · 2023', pr4_title:'Oreokastro Heights', pr4_meta:'154 τ.μ. · Maisonette · €365.000',
+    pr5_tag:'Εύοσμος · 2023', pr5_title:'West City Suites', pr5_meta:'124 τ.μ. · Maisonette · €295.000',
+    proc_eye:'Πώς Δουλεύουμε', proc_h2:'Η Διαδικασία <em>μας</em>',
+    s1_t:'Σχεδιασμός', s1_d:'Αρχιτεκτονική μελέτη προσαρμοσμένη στις ανάγκες και τις επιθυμίες σας.',
+    s2_t:'Αδειοδότηση', s2_d:'Αναλαμβάνουμε πλήρως τη διαδικασία έκδοσης αδειών από τις αρμόδιες αρχές.',
+    s3_t:'Κατασκευή', s3_d:'Εκτέλεση με τα υψηλότερα πρότυπα ποιότητας και πιστή τήρηση χρονοδιαγραμμάτων.',
+    s4_t:'Παράδοση', s4_d:'Παράδοση με πλήρη τεκμηρίωση, εγγυήσεις και after-sales υποστήριξη.',
+    areas_eye:'Κάλυψη', areas_h2:'Περιοχές <em>Δραστηριότητας</em>',
+    area1_d:'Κύρια έδρα δραστηριότητας', area2_d:'Νέα πολυτελή έργα', area3_d:'Βορειοδυτική Θεσ/νίκη', area4_d:'Δυτική Θεσσαλονίκη',
+    area5_n:'Κεντρική Θεσ/νίκη', area5_d:'Αστικά premium έργα',
+    test_eye:'Τι Λένε οι Πελάτες μας', test_h2:'<em>Εμπιστοσύνη</em> που Αποδεικνύεται',
+    cont_eye:'Επικοινωνία', cont_h2:'Ξεκινήστε<br>το <em>Ταξίδι σας</em>',
+    cont_desc:'Επικοινωνήστε μαζί μας για να συζητήσουμε το επόμενό σας έργο ή για να μάθετε για τις διαθέσιμες κατοικίες μας.',
+    c_addr_l:'Διεύθυνση', c_phone_l:'Τηλέφωνο', c_email_l:'Email',
+    form_eye:'Φόρμα Επικοινωνίας', form_h2:'Στείλτε μας<br><em>Μήνυμα</em>',
+    f_name:'Ονοματεπώνυμο', f_email:'Email', f_phone:'Τηλέφωνο', f_msg:'Μήνυμα', f_send:'Αποστολή Μηνύματος',
+    f_interest:'Ενδιαφέρον', fi_buy:'Αγορά κατοικίας', fi_invest:'Επένδυση', fi_info:'Γενικές πληροφορίες',
+    footer_copy:'© 2025 Menexis Constructions. Όλα τα δικαιώματα κατοχυρωμένα.',
+    about_page_h1:'Γνωρίστε μας', about_page_sub:'Η ιστορία μας, οι αξίες μας, η ομάδα μας — 27 χρόνια αριστείας στην κατασκευή.',
+    story_eye:'Η Ιστορία μας', story_h2:'27 Χρόνια <em>Αριστείας</em>',
+    story_p1:'Η Menexis Constructions ιδρύθηκε το 1997 από τον μηχανικό Γιώργο Μενέξη με ένα όραμα: να κατασκευάζει κατοικίες που συνδυάζουν εξαιρετική ποιότητα με σύγχρονη αισθητική, σε τιμές που αντανακλούν πραγματική αξία. Ξεκινώντας από ένα μικρό γραφείο στην Καλαμαριά, η εταιρεία μεγάλωσε σταδιακά, χτίζοντας τη φήμη της βήμα-βήμα.',
+    story_p2:'Σήμερα, 27 χρόνια αργότερα, η Menexis Constructions παρουσιάζει πάνω από 80 ολοκληρωμένα έργα σε 6 περιοχές της Θεσσαλονίκης. Η εταιρεία δραστηριοποιείται κυρίως στην Καλαμαριά, τη Θέρμη, το Ωραιόκαστρο και τον Εύοσμο, προσφέροντας πολυτελείς κατοικίες που αντέχουν στον χρόνο.',
+    team_eye:'Η Ομάδα μας', team_h2:'Οι <em>Άνθρωποι</em> πίσω από κάθε Έργο',
+    team1_role:'Ιδρυτής & Διευθύνων Μηχανικός', team1_bio:'Πολιτικός Μηχανικός με 30+ χρόνια εμπειρίας. Ο ιδρυτής και καρδιά της εταιρείας.',
+    team2_name:'Αρχιτεκτονικό Τμήμα', team2_role:'Σχεδιασμός & Αισθητική', team2_bio:'Ομάδα αρχιτεκτόνων που μετατρέπει κάθε έργο σε μοναδική αρχιτεκτονική πρόταση.',
+    team3_name:'Τεχνικό Τμήμα', team3_role:'Επίβλεψη & Ποιοτικός Έλεγχος', team3_bio:'Έμπειροι μηχανικοί που εγγυώνται άψογη εκτέλεση και τήρηση προδιαγραφών.',
+    val_eye:'Αξίες', val_h2:'Τι μας <em>Καθοδηγεί</em>',
+    v1_t:'Τεχνογνωσία', v1_d:'Βαθιά γνώση υλικών, μεθόδων και κανονισμών — εφαρμοσμένη σε κάθε τετραγωνικό μέτρο.',
+    v2_t:'Ποιοτικός Έλεγχος', v2_d:'Κάθε φάση κατασκευής ελέγχεται αυστηρά. Δεν παραδίδουμε τίποτα που δεν θα θέλαμε για τους δικούς μας.',
+    v3_t:'Ανθρωποκεντρική Προσέγγιση', v3_d:'Κάθε πελάτης έχει μοναδικές ανάγκες. Η επικοινωνία και η διαφάνεια είναι αδιαπραγμάτευτες.',
+    v4_t:'Μακροπρόθεσμη Αξία', v4_d:'Χτίζουμε κατοικίες που εκτιμώνται — επενδύσεις που αντέχουν στον χρόνο και στην αγορά.',
+    proj_page_h1:'Τα Έργα μας', proj_page_sub:'Εξερευνήστε το χαρτοφυλάκιό μας — από πολυτελείς maisonettes στη Θέρμη έως αστικά διαμερίσματα στην Καλαμαριά.',
+    props_eye:'Διαθέσιμες Κατοικίες', props_page_h1:'Αγοράστε μια Κατοικία Menexis', props_page_sub:'Επιλεγμένες, άμεσα διαθέσιμες κατοικίες από τον κατασκευαστή — χωρίς μεσάζοντα.',
+    f_all:'Όλα', f_completed:'Ολοκληρωμένα', f_ongoing:'Σε Εξέλιξη', f_apt:'Διαμέρισμα', f_mais:'Maisonette',
+    cont_page_h1:'Επικοινωνήστε μαζί μας', cont_page_sub:'Είμαστε εδώ για να απαντήσουμε σε κάθε ερώτησή σας.',
+    c_hours_l:'Ωράριο', c_hours_v:'Δε–Πα: 09:00–18:00',
+    map_note:'Ο χάρτης θα ενσωματωθεί με Google Maps API κατά την παραγωγή.',
+    marquee_areas: ['Καλαμαριά','Θέρμη','Ωραιόκαστρο','Εύοσμος','Θεσσαλονίκη','Πολυτελείς Κατοικίες','Από το 1997']
+  },
+  en: {
+    nav_home:'Home', nav_about:'Company', nav_projects:'Projects', nav_props:'Available Properties', nav_contact:'Contact',
+    hero_eyebrow:'Construction Excellence Since 1997',
+    hero_h1_raw:'We Build<br><em>Luxury</em><br>Residences',
+    hero_sub:'From Thessaloniki to Thermi and beyond — we design spaces that combine architectural perfection with modern living.',
+    hero_btn1:'View Our Projects', hero_btn2:'Our Story',
+    stat1:'Years of Experience', stat2:'Completed Projects', stat3:'Areas of Activity', stat4:'Happy Families',
+    badge_lbl:'Company Founded',
+    about_eye:'The Company', about_h2:'Excellence in<br><em>Construction</em>',
+    about_p:'Since 1997, Menexis Constructions has been synonymous with quality and reliability in Thessaloniki\'s construction sector. With dozens of completed buildings and luxury residential complexes, we are committed to every detail.',
+    p1_t:'Architecture', p1_d:'Modern design that highlights aesthetics and functionality.',
+    p2_t:'Quality', p2_d:'Selected materials and continuous quality control at every phase.',
+    p3_t:'Reliability', p3_d:'We respect timelines and our agreements — without exception.',
+    p4_t:'Value', p4_d:'Residences that appreciate over time — a lifetime investment.',
+    proj_eye:'Portfolio', proj_h2:'Selected <em>Projects</em>', view_all:'View All',
+    pr1_tag:'Thermi · 2024', pr1_title:'Residence Thermi Grand', pr1_meta:'245 sqm · Maisonette · 4 Bedrooms · €500,000',
+    pr2_tag:'Kalamaria · 2024', pr2_title:'Kalamaria Prestige', pr2_meta:'175 sqm · Apartment · €430,000',
+    pr3_tag:'Thermi · 2024', pr3_title:'Sky Loft Thermi', pr3_meta:'120 sqm · 7th Floor · €420,000',
+    pr4_tag:'Oreokastro · 2023', pr4_title:'Oreokastro Heights', pr4_meta:'154 sqm · Maisonette · €365,000',
+    pr5_tag:'Evosmos · 2023', pr5_title:'West City Suites', pr5_meta:'124 sqm · Maisonette · €295,000',
+    proc_eye:'How We Work', proc_h2:'Our <em>Process</em>',
+    s1_t:'Design', s1_d:'Architectural study tailored to your needs and wishes.',
+    s2_t:'Permitting', s2_d:'We fully handle the permit and approval process with all authorities.',
+    s3_t:'Construction', s3_d:'Execution to the highest quality standards, strictly on schedule.',
+    s4_t:'Delivery', s4_d:'Handover with full documentation, warranties and after-sales support.',
+    areas_eye:'Coverage', areas_h2:'Areas of <em>Activity</em>',
+    area1_d:'Main area of activity', area2_d:'New luxury developments', area3_d:'Northwest Thessaloniki', area4_d:'West Thessaloniki',
+    area5_n:'Central Thessaloniki', area5_d:'Premium urban projects',
+    test_eye:'What Our Clients Say', test_h2:'<em>Trust</em> Proven Over Time',
+    cont_eye:'Contact', cont_h2:'Start Your<br><em>Journey</em>',
+    cont_desc:'Contact us to discuss your next project or to find out about available properties.',
+    c_addr_l:'Address', c_phone_l:'Phone', c_email_l:'Email',
+    form_eye:'Contact Form', form_h2:'Send Us a<br><em>Message</em>',
+    f_name:'Full Name', f_email:'Email', f_phone:'Phone', f_msg:'Message', f_send:'Send Message',
+    f_interest:'Interest', fi_buy:'Buy a property', fi_invest:'Investment', fi_info:'General enquiry',
+    footer_copy:'© 2025 Menexis Constructions. All rights reserved.',
+    about_page_h1:'About Us', about_page_sub:'Our history, values, and team — 27 years of construction excellence.',
+    story_eye:'Our Story', story_h2:'27 Years of <em>Excellence</em>',
+    story_p1:'Menexis Constructions was founded in 1997 by engineer Giorgos Menexis with a vision: to build residences that combine exceptional quality with contemporary aesthetics, at prices that reflect real value. Starting from a small office in Kalamaria, the company grew steadily, building its reputation step by step.',
+    story_p2:'Today, 27 years later, Menexis Constructions presents over 80 completed projects across 6 areas of Thessaloniki. The company operates primarily in Kalamaria, Thermi, Oreokastro and Evosmos, offering luxury residences built to last.',
+    team_eye:'Our Team', team_h2:'The <em>People</em> Behind Every Project',
+    team1_role:'Founder & Managing Engineer', team1_bio:'Civil Engineer with 30+ years of experience. The founder and driving force behind the company.',
+    team2_name:'Architecture Department', team2_role:'Design & Aesthetics', team2_bio:'A team of architects that transforms every project into a unique architectural proposal.',
+    team3_name:'Technical Department', team3_role:'Supervision & Quality Control', team3_bio:'Experienced engineers who ensure flawless execution and compliance with all specifications.',
+    val_eye:'Our Values', val_h2:'What <em>Guides</em> Us',
+    v1_t:'Expertise', v1_d:'Deep knowledge of materials, methods and regulations — applied to every square metre.',
+    v2_t:'Quality Control', v2_d:'Every construction phase is rigorously inspected. We never deliver anything we wouldn\'t want for our own.',
+    v3_t:'Client-First Approach', v3_d:'Every client has unique needs. Communication and transparency are non-negotiable.',
+    v4_t:'Long-Term Value', v4_d:'We build homes that appreciate — investments that stand the test of time.',
+    proj_page_h1:'Our Projects', proj_page_sub:'Explore our portfolio — from luxury maisonettes in Thermi to urban apartments in Kalamaria.',
+    props_eye:'Available Properties', props_page_h1:'Buy a Menexis Residence', props_page_sub:'Handpicked, immediately available properties direct from the developer — no middlemen.',
+    f_all:'All', f_completed:'Completed', f_ongoing:'Ongoing', f_apt:'Apartment', f_mais:'Maisonette',
+    cont_page_h1:'Contact Us', cont_page_sub:'We are here to answer all your questions.',
+    c_hours_l:'Office Hours', c_hours_v:'Mon–Fri: 09:00–18:00',
+    map_note:'Map will be embedded with Google Maps API in production.',
+    marquee_areas: ['Kalamaria','Thermi','Oreokastro','Evosmos','Thessaloniki','Luxury Residences','Since 1997']
+  },
+  de: {
+    nav_home:'Startseite', nav_about:'Unternehmen', nav_projects:'Projekte', nav_props:'Verfügbare Immobilien', nav_contact:'Kontakt',
+    hero_eyebrow:'Bauexzellenz seit 1997',
+    hero_h1_raw:'Wir bauen<br><em>Luxus</em>-<br>Residenzen',
+    hero_sub:'Von Thessaloniki bis Thermi — wir gestalten Räume, die architektonische Perfektion mit modernem Wohnen verbinden.',
+    hero_btn1:'Unsere Projekte', hero_btn2:'Unsere Geschichte',
+    stat1:'Jahre Erfahrung', stat2:'Abgeschlossene Projekte', stat3:'Tätigkeitsbereiche', stat4:'Glückliche Familien',
+    badge_lbl:'Unternehmensgründung',
+    about_eye:'Das Unternehmen', about_h2:'Exzellenz im<br><em>Bauwesen</em>',
+    about_p:'Seit 1997 steht Menexis Constructions für Qualität und Zuverlässigkeit im Bausektor von Thessaloniki. Mit Dutzenden abgeschlossener Gebäude und Luxuswohnkomplexe setzen wir uns für jedes Detail ein.',
+    p1_t:'Architektur', p1_d:'Modernes Design, das Ästhetik und Funktionalität hervorhebt.',
+    p2_t:'Qualität', p2_d:'Ausgewählte Materialien und kontinuierliche Qualitätskontrolle in jeder Phase.',
+    p3_t:'Zuverlässigkeit', p3_d:'Wir respektieren Zeitpläne und Vereinbarungen — ausnahmslos.',
+    p4_t:'Wert', p4_d:'Wohnungen, die im Laufe der Zeit an Wert gewinnen — eine lebenslange Investition.',
+    proj_eye:'Portfolio', proj_h2:'Ausgewählte <em>Projekte</em>', view_all:'Alle anzeigen',
+    pr1_tag:'Thermi · 2024', pr1_title:'Residence Thermi Grand', pr1_meta:'245 m² · Maisonette · 4 Zimmer · €500.000',
+    pr2_tag:'Kalamaria · 2024', pr2_title:'Kalamaria Prestige', pr2_meta:'175 m² · Wohnung · €430.000',
+    pr3_tag:'Thermi · 2024', pr3_title:'Sky Loft Thermi', pr3_meta:'120 m² · 7. Etage · €420.000',
+    pr4_tag:'Oreokastro · 2023', pr4_title:'Oreokastro Heights', pr4_meta:'154 m² · Maisonette · €365.000',
+    pr5_tag:'Evosmos · 2023', pr5_title:'West City Suites', pr5_meta:'124 m² · Maisonette · €295.000',
+    proc_eye:'Wie wir arbeiten', proc_h2:'Unser <em>Prozess</em>',
+    s1_t:'Planung', s1_d:'Architektonische Studie, angepasst an Ihre Bedürfnisse und Wünsche.',
+    s2_t:'Genehmigung', s2_d:'Wir übernehmen vollständig das Genehmigungsverfahren bei allen Behörden.',
+    s3_t:'Bau', s3_d:'Ausführung nach höchsten Qualitätsstandards, strikt termingerecht.',
+    s4_t:'Übergabe', s4_d:'Übergabe mit vollständiger Dokumentation, Garantien und After-Sales-Support.',
+    areas_eye:'Abdeckung', areas_h2:'Tätigkeits-<em>bereiche</em>',
+    area1_d:'Haupttätigkeitsbereich', area2_d:'Neue Luxusprojekte', area3_d:'Nordwestliches Thessaloniki', area4_d:'Westliches Thessaloniki',
+    area5_n:'Zentrum Thessaloniki', area5_d:'Premium Stadtprojekte',
+    test_eye:'Was unsere Kunden sagen', test_h2:'<em>Vertrauen</em> über Jahrzehnte bewiesen',
+    cont_eye:'Kontakt', cont_h2:'Beginnen Sie Ihre<br><em>Reise</em>',
+    cont_desc:'Kontaktieren Sie uns, um Ihr nächstes Projekt zu besprechen oder mehr über verfügbare Immobilien zu erfahren.',
+    c_addr_l:'Adresse', c_phone_l:'Telefon', c_email_l:'E-Mail',
+    form_eye:'Kontaktformular', form_h2:'Schreiben Sie<br>uns eine <em>Nachricht</em>',
+    f_name:'Vollständiger Name', f_email:'E-Mail', f_phone:'Telefon', f_msg:'Nachricht', f_send:'Nachricht senden',
+    f_interest:'Interesse', fi_buy:'Immobilienkauf', fi_invest:'Investition', fi_info:'Allgemeine Anfrage',
+    footer_copy:'© 2025 Menexis Constructions. Alle Rechte vorbehalten.',
+    about_page_h1:'Über uns', about_page_sub:'Unsere Geschichte, Werte und unser Team — 27 Jahre Bauexzellenz.',
+    story_eye:'Unsere Geschichte', story_h2:'27 Jahre <em>Exzellenz</em>',
+    story_p1:'Menexis Constructions wurde 1997 von dem Ingenieur Giorgos Menexis mit einer Vision gegründet: Wohnungen zu bauen, die außergewöhnliche Qualität mit zeitgemäßer Ästhetik verbinden. Aus einem kleinen Büro in Kalamaria wuchs das Unternehmen stetig und baute seinen Ruf Schritt für Schritt auf.',
+    story_p2:'Heute, 27 Jahre später, kann Menexis Constructions über 80 abgeschlossene Projekte in 6 Gebieten von Thessaloniki vorweisen. Das Unternehmen ist hauptsächlich in Kalamaria, Thermi, Oreokastro und Evosmos tätig und bietet Luxuswohnungen, die für die Ewigkeit gebaut sind.',
+    team_eye:'Unser Team', team_h2:'Die <em>Menschen</em> hinter jedem Projekt',
+    team1_role:'Gründer & Leitender Ingenieur', team1_bio:'Bauingenieur mit 30+ Jahren Erfahrung. Der Gründer und Antrieb des Unternehmens.',
+    team2_name:'Architekturabteilung', team2_role:'Entwurf & Ästhetik', team2_bio:'Ein Architektenteam, das jedes Projekt in einen einzigartigen architektonischen Vorschlag verwandelt.',
+    team3_name:'Technikabteilung', team3_role:'Überwachung & Qualitätskontrolle', team3_bio:'Erfahrene Ingenieure, die eine einwandfreie Ausführung und Einhaltung aller Spezifikationen gewährleisten.',
+    val_eye:'Unsere Werte', val_h2:'Was uns <em>leitet</em>',
+    v1_t:'Fachkompetenz', v1_d:'Tiefgreifende Kenntnisse in Materialien, Methoden und Vorschriften — angewandt auf jeden Quadratmeter.',
+    v2_t:'Qualitätskontrolle', v2_d:'Jede Bauphase wird streng überwacht. Wir liefern nichts, was wir selbst nicht für unsere Lieben wählen würden.',
+    v3_t:'Kundenorientierung', v3_d:'Jeder Kunde hat einzigartige Bedürfnisse. Kommunikation und Transparenz sind nicht verhandelbar.',
+    v4_t:'Langfristiger Wert', v4_d:'Wir bauen Häuser, die an Wert gewinnen — Investitionen, die der Zeit standhalten.',
+    proj_page_h1:'Unsere Projekte', proj_page_sub:'Entdecken Sie unser Portfolio — von Luxus-Maisonettes in Thermi bis zu Stadtwohnungen in Kalamaria.',
+    props_eye:'Verfügbare Immobilien', props_page_h1:'Kaufen Sie eine Menexis-Residenz', props_page_sub:'Handverlesene, sofort verfügbare Immobilien direkt vom Bauträger — ohne Zwischenhändler.',
+    f_all:'Alle', f_completed:'Abgeschlossen', f_ongoing:'In Bau', f_apt:'Wohnung', f_mais:'Maisonette',
+    cont_page_h1:'Kontaktieren Sie uns', cont_page_sub:'Wir sind hier, um alle Ihre Fragen zu beantworten.',
+    c_hours_l:'Öffnungszeiten', c_hours_v:'Mo–Fr: 09:00–18:00',
+    map_note:'Karte wird in der Produktion mit der Google Maps API eingebettet.',
+    marquee_areas: ['Kalamaria','Thermi','Oreokastro','Evosmos','Thessaloniki','Luxuswohnungen','Seit 1997']
+  },
+  ru: {
+    nav_home:'Главная', nav_about:'Компания', nav_projects:'Проекты', nav_props:'Доступное жильё', nav_contact:'Контакты',
+    hero_eyebrow:'Строительное совершенство с 1997 года',
+    hero_h1_raw:'Мы строим<br><em>элитные</em><br>резиденции',
+    hero_sub:'От Салоников до Терми — мы создаём пространства, сочетающие архитектурное совершенство с современной жизнью.',
+    hero_btn1:'Наши проекты', hero_btn2:'Наша история',
+    stat1:'Лет опыта', stat2:'Завершённых проектов', stat3:'Районов деятельности', stat4:'Счастливых семей',
+    badge_lbl:'Год основания',
+    about_eye:'Компания', about_h2:'Совершенство в<br><em>строительстве</em>',
+    about_p:'С 1997 года Menexis Constructions является синонимом качества и надёжности в строительном секторе Салоников. Десятки завершённых зданий и элитных жилых комплексов — каждый проект выполнен с вниманием к каждой детали.',
+    p1_t:'Архитектура', p1_d:'Современный дизайн, подчёркивающий эстетику и функциональность.',
+    p2_t:'Качество', p2_d:'Отборные материалы и непрерывный контроль качества на каждом этапе.',
+    p3_t:'Надёжность', p3_d:'Мы соблюдаем сроки и договорённости — без исключений.',
+    p4_t:'Ценность', p4_d:'Жильё, которое растёт в цене — инвестиция на всю жизнь.',
+    proj_eye:'Портфолио', proj_h2:'Избранные <em>проекты</em>', view_all:'Смотреть все',
+    pr1_tag:'Терми · 2024', pr1_title:'Residence Thermi Grand', pr1_meta:'245 м² · Майсонет · 4 комнаты · €500 000',
+    pr2_tag:'Каламарья · 2024', pr2_title:'Kalamaria Prestige', pr2_meta:'175 м² · Апартаменты · €430 000',
+    pr3_tag:'Терми · 2024', pr3_title:'Sky Loft Thermi', pr3_meta:'120 м² · 7-й этаж · €420 000',
+    pr4_tag:'Ореокастро · 2023', pr4_title:'Oreokastro Heights', pr4_meta:'154 м² · Майсонет · €365 000',
+    pr5_tag:'Эвосмос · 2023', pr5_title:'West City Suites', pr5_meta:'124 м² · Майсонет · €295 000',
+    proc_eye:'Как мы работаем', proc_h2:'Наш <em>процесс</em>',
+    s1_t:'Проектирование', s1_d:'Архитектурный проект, адаптированный под ваши нужды и пожелания.',
+    s2_t:'Согласования', s2_d:'Мы полностью берём на себя получение разрешений от всех ведомств.',
+    s3_t:'Строительство', s3_d:'Исполнение по высочайшим стандартам качества, строго в срок.',
+    s4_t:'Сдача', s4_d:'Передача с полной документацией, гарантиями и послепродажной поддержкой.',
+    areas_eye:'Охват', areas_h2:'Районы <em>деятельности</em>',
+    area1_d:'Основной район деятельности', area2_d:'Новые элитные объекты', area3_d:'Северо-западные Салоники', area4_d:'Западные Салоники',
+    area5_n:'Центр Салоников', area5_d:'Премиальные городские проекты',
+    test_eye:'Что говорят наши клиенты', test_h2:'<em>Доверие</em>, проверенное временем',
+    cont_eye:'Контакты', cont_h2:'Начните ваше<br><em>путешествие</em>',
+    cont_desc:'Свяжитесь с нами, чтобы обсудить ваш следующий проект или узнать о доступных объектах недвижимости.',
+    c_addr_l:'Адрес', c_phone_l:'Телефон', c_email_l:'Email',
+    form_eye:'Форма обратной связи', form_h2:'Напишите<br>нам <em>сообщение</em>',
+    f_name:'Полное имя', f_email:'Email', f_phone:'Телефон', f_msg:'Сообщение', f_send:'Отправить сообщение',
+    f_interest:'Интерес', fi_buy:'Покупка жилья', fi_invest:'Инвестиция', fi_info:'Общий вопрос',
+    footer_copy:'© 2025 Menexis Constructions. Все права защищены.',
+    about_page_h1:'О нас', about_page_sub:'Наша история, ценности и команда — 27 лет строительного совершенства.',
+    story_eye:'Наша история', story_h2:'27 лет <em>совершенства</em>',
+    story_p1:'Menexis Constructions была основана в 1997 году инженером Йоргосом Менексисом с единственной целью: строить жильё, сочетающее исключительное качество с современной эстетикой. Начав с небольшого офиса в Каламарье, компания постепенно росла, шаг за шагом завоёвывая репутацию.',
+    story_p2:'Сегодня, 27 лет спустя, Menexis Constructions реализовала более 80 проектов в 6 районах Салоников. Компания работает преимущественно в Каламарье, Терми, Ореокастро и Эвосмосе, предлагая элитное жильё, рассчитанное на долгие годы.',
+    team_eye:'Наша команда', team_h2:'<em>Люди</em> за каждым проектом',
+    team1_role:'Основатель и главный инженер', team1_bio:'Гражданский инженер с 30+ годами опыта. Основатель и движущая сила компании.',
+    team2_name:'Архитектурный отдел', team2_role:'Дизайн и эстетика', team2_bio:'Команда архитекторов, превращающая каждый проект в уникальное архитектурное предложение.',
+    team3_name:'Технический отдел', team3_role:'Надзор и контроль качества', team3_bio:'Опытные инженеры, обеспечивающие безупречное исполнение и соответствие всем стандартам.',
+    val_eye:'Наши ценности', val_h2:'Что нас <em>направляет</em>',
+    v1_t:'Экспертиза', v1_d:'Глубокое знание материалов, методов и норм — применяемое на каждом квадратном метре.',
+    v2_t:'Контроль качества', v2_d:'Каждый этап строительства строго проверяется. Мы не сдаём ничего, чего не хотели бы для своих близких.',
+    v3_t:'Клиентоориентированность', v3_d:'У каждого клиента уникальные потребности. Коммуникация и прозрачность — не подлежат обсуждению.',
+    v4_t:'Долгосрочная ценность', v4_d:'Мы строим дома, которые растут в цене — инвестиции, выдержавшие испытание временем.',
+    proj_page_h1:'Наши проекты', proj_page_sub:'Изучите наше портфолио — от элитных майсонетов в Терми до городских апартаментов в Каламарье.',
+    props_eye:'Доступное жильё', props_page_h1:'Купите резиденцию Menexis', props_page_sub:'Тщательно отобранные, сразу доступные объекты напрямую от застройщика — без посредников.',
+    f_all:'Все', f_completed:'Завершённые', f_ongoing:'В процессе', f_apt:'Апартаменты', f_mais:'Майсонет',
+    cont_page_h1:'Свяжитесь с нами', cont_page_sub:'Мы готовы ответить на все ваши вопросы.',
+    c_hours_l:'Часы работы', c_hours_v:'Пн–Пт: 09:00–18:00',
+    map_note:'Карта будет встроена через Google Maps API при запуске.',
+    marquee_areas: ['Каламарья','Терми','Ореокастро','Эвосмос','Салоники','Элитные резиденции','С 1997 года']
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// TESTIMONIALS DATA
+// ═══════════════════════════════════════════════════
+const TESTIMONIALS = {
+  el: [
+    { stars:5, q:'«Παραδώσαμε το σπίτι στη Θέρμη στην ώρα του και ακριβώς όπως το συμφωνήσαμε. Η ποιότητα κατασκευής ξεπέρασε τις προσδοκίες μας. Άνθρωποι αξιόπιστοι και επαγγελματίες.»', a:'Ν.Π. & Μ.Π. — Ιδιοκτήτες, Θέρμη 2024' },
+    { stars:5, q:'«Αγοράσαμε maisonette στην Καλαμαριά πριν από 3 χρόνια. Η αξία της έχει ανέβει σημαντικά και ο χώρος είναι ακριβώς όπως υποσχέθηκαν. Επαγγελματισμός σε κάθε βήμα.»', a:'Γ.Α. — Επιχειρηματίας, Θεσσαλονίκη' },
+    { stars:5, q:'«Ως επενδυτής ακινήτων, έχω συνεργαστεί με πολλούς κατασκευαστές. Η Menexis ξεχωρίζει για τη διαφάνεια, την ποιότητα και την εμπιστοσύνη που εμπνέει.»', a:'Σ.Δ. — Επενδύτρια Ακινήτων' },
+    { stars:5, q:'«Το διαμέρισμα στον 7ο όροφο στη Θέρμη είναι απλά εκπληκτικό. Η θέα, τα υλικά, η κατασκευή — όλα άριστα. Ήταν η καλύτερη επένδυση που κάναμε.»', a:'Κ.Μ. & Α.Μ. — Οικογένεια, Θέρμη 2024' },
+    { stars:5, q:'«Η διαδικασία από την αγορά έως την παράδοση ήταν απόλυτα διαφανής. Οποιαδήποτε ερώτηση είχαμε, απαντήθηκε αμέσως. Σπάνιο επίπεδο εξυπηρέτησης.»', a:'Δ.Π. — Δικηγόρος, Θεσσαλονίκη' },
+    { stars:5, q:'«Αγοράσαμε κατοικία στο Ωραιόκαστρο και είμαστε απόλυτα ικανοποιημένοι. Η Menexis κρατά ό,τι υπόσχεται. Τους έχω συστήσει σε φίλους και συγγενείς.»', a:'Ε.Κ. — Εκπαιδευτικός, Ωραιόκαστρο' },
+    { stars:5, q:'«Εντυπωσιαστήκαμε από την οργάνωση και την ακρίβεια. Ο κ. Μενέξης ήταν πάντα προσβάσιμος και έδινε σαφείς απαντήσεις. Κτίσαμε τη ζωή μας σε ένα σπίτι Menexis.»', a:'Β.Τ. & Λ.Τ. — Ζευγάρι, Εύοσμος 2023' },
+  ],
+  en: [
+    { stars:5, q:'"Our home in Thermi was delivered on time and exactly as agreed. The build quality exceeded our expectations. Reliable and professional people."', a:'N.P. & M.P. — Owners, Thermi 2024' },
+    { stars:5, q:'"We bought a maisonette in Kalamaria 3 years ago. Its value has risen significantly and the space is exactly as promised. Professionalism at every step."', a:'G.A. — Businessman, Thessaloniki' },
+    { stars:5, q:'"As a property investor I have worked with many developers. Menexis stands out for transparency, quality and the trust they inspire."', a:'S.D. — Property Investor' },
+    { stars:5, q:'"The 7th-floor apartment in Thermi is simply stunning. The view, the materials, the construction — all excellent. The best investment we have ever made."', a:'K.M. & A.M. — Family, Thermi 2024' },
+    { stars:5, q:'"The process from purchase to delivery was completely transparent. Every question we had was answered immediately. A rare level of service."', a:'D.P. — Lawyer, Thessaloniki' },
+    { stars:5, q:'"We bought a home in Oreokastro and are completely satisfied. Menexis delivers what they promise. I have recommended them to friends and family."', a:'E.K. — Teacher, Oreokastro' },
+    { stars:5, q:'"We were impressed by the organisation and precision. Mr Menexis was always accessible and gave clear answers. We built our life in a Menexis home."', a:'V.T. & L.T. — Couple, Evosmos 2023' },
+  ],
+  de: [
+    { stars:5, q:'„Unser Haus in Thermi wurde pünktlich und genau wie vereinbart übergeben. Die Bauqualität hat unsere Erwartungen übertroffen. Zuverlässige und professionelle Menschen."', a:'N.P. & M.P. — Eigentümer, Thermi 2024' },
+    { stars:5, q:'„Wir haben vor 3 Jahren eine Maisonette in Kalamaria gekauft. Der Wert ist erheblich gestiegen und der Raum ist genau wie versprochen. Professionalität auf jedem Schritt."', a:'G.A. — Unternehmer, Thessaloniki' },
+    { stars:5, q:'„Als Immobilieninvestor habe ich mit vielen Bauträgern zusammengearbeitet. Menexis sticht durch Transparenz, Qualität und das Vertrauen hervor, das sie einflößen."', a:'S.D. — Immobilieninvestorin' },
+    { stars:5, q:'„Die Wohnung im 7. Stock in Thermi ist einfach atemberaubend. Die Aussicht, die Materialien, der Bau — alles erstklassig. Die beste Investition, die wir je gemacht haben."', a:'K.M. & A.M. — Familie, Thermi 2024' },
+    { stars:5, q:'„Der Prozess vom Kauf bis zur Übergabe war völlig transparent. Jede Frage wurde sofort beantwortet. Ein seltenes Serviceniveau."', a:'D.P. — Rechtsanwalt, Thessaloniki' },
+    { stars:5, q:'„Wir haben ein Haus in Oreokastro gekauft und sind vollständig zufrieden. Menexis hält, was sie versprechen. Ich habe sie Freunden und Familie empfohlen."', a:'E.K. — Lehrerin, Oreokastro' },
+    { stars:5, q:'„Wir waren von der Organisation und Präzision beeindruckt. Herr Menexis war immer erreichbar und gab klare Antworten. Wir haben unser Leben in einem Menexis-Haus aufgebaut."', a:'V.T. & L.T. — Paar, Evosmos 2023' },
+  ],
+  ru: [
+    { stars:5, q:'«Наш дом в Терми был сдан вовремя и именно так, как было договорено. Качество строительства превзошло наши ожидания. Надёжные и профессиональные люди.»', a:'Н.П. и М.П. — владельцы, Терми 2024' },
+    { stars:5, q:'«Три года назад мы купили майсонет в Каламарье. Его стоимость значительно выросла, и пространство — именно такое, каким обещали. Профессионализм на каждом шагу.»', a:'Г.А. — предприниматель, Салоники' },
+    { stars:5, q:'«Как инвестор в недвижимость, я работал со многими застройщиками. Menexis выделяется прозрачностью, качеством и доверием, которое они внушают.»', a:'С.Д. — инвестор в недвижимость' },
+    { stars:5, q:'«Апартаменты на 7-м этаже в Терми просто восхитительны. Вид, материалы, строительство — всё на высшем уровне. Лучшая инвестиция в нашей жизни.»', a:'К.М. и А.М. — семья, Терми 2024' },
+    { stars:5, q:'«Весь процесс от покупки до сдачи был полностью прозрачным. На любой вопрос отвечали незамедлительно. Редкий уровень сервиса.»', a:'Д.П. — адвокат, Салоники' },
+    { stars:5, q:'«Мы купили дом в Ореокастро и полностью довольны. Menexis выполняет всё обещанное. Я рекомендовал их друзьям и родственникам.»', a:'Е.К. — учитель, Ореокастро' },
+    { stars:5, q:'«Нас впечатлили организованность и точность. Господин Менексис всегда был доступен и давал чёткие ответы. Мы построили свою жизнь в доме Menexis.»', a:'В.Т. и Л.Т. — пара, Эвосмос 2023' },
+  ]
+};
+
+// ═══════════════════════════════════════════════════
+// PROJECTS DATA
+// ═══════════════════════════════════════════════════
+const PROJECTS = [
+  { tag:'Θέρμη', year:'2024', title:'Residence Thermi Grand', meta:'245 τ.μ. · Maisonette · 4 Δωμάτια', price:'€500.000', cat:'thermi completed', bg:'pb1' },
+  { tag:'Καλαμαριά', year:'2024', title:'Kalamaria Prestige', meta:'175 τ.μ. · Διαμέρισμα · 3 Δωμάτια', price:'€430.000', cat:'kalamaria completed', bg:'pb2' },
+  { tag:'Θέρμη', year:'2024', title:'Sky Loft Thermi', meta:'120 τ.μ. · Διαμέρισμα · 7ος Όροφος', price:'€420.000', cat:'thermi completed', bg:'pb3' },
+  { tag:'Θέρμη', year:'2024', title:'Thermi Maisonette A', meta:'154 τ.μ. · Maisonette · 3 Δωμάτια', price:'€365.000', cat:'thermi completed', bg:'pb4' },
+  { tag:'Θέρμη', year:'2024', title:'Thermi Maisonette B', meta:'124 τ.μ. · Maisonette · 3 Δωμάτια', price:'€295.000', cat:'thermi completed', bg:'pb5' },
+  { tag:'Θέρμη', year:'2023', title:'Thermi Maisonette C', meta:'114 τ.μ. · Maisonette · 3 Δωμάτια', price:'€280.000', cat:'thermi completed', bg:'pb1' },
+  { tag:'Ωραιόκαστρο', year:'2023', title:'Oreokastro Heights', meta:'154 τ.μ. · Maisonette · 3 Δωμάτια', price:'€365.000', cat:'oreokastro completed', bg:'pb2' },
+  { tag:'Εύοσμος', year:'2023', title:'West City Suites', meta:'124 τ.μ. · Maisonette · 3 Δωμάτια', price:'€295.000', cat:'evosmos completed', bg:'pb3' },
+  { tag:'Καλαμαριά', year:'2024', title:'Kalamaria Tower Suite', meta:'175 τ.μ. · Διαμέρισμα · 3 Δωμάτια', price:'€430.000', cat:'kalamaria ongoing', bg:'pb4' },
+  { tag:'Θέρμη', year:'2025', title:'Thermi Panorama', meta:'200 τ.μ. · Maisonette · 4 Δωμάτια', price:'Σε Εξέλιξη', cat:'thermi ongoing', bg:'pb5' },
+  { tag:'Ωραιόκαστρο', year:'2025', title:'Oreokastro Residences', meta:'110 τ.μ. · Διαμέρισμα · 2 Δωμάτια', price:'Σε Εξέλιξη', cat:'oreokastro ongoing', bg:'pb1' },
+  { tag:'Καλαμαριά', year:'2022', title:'Kalamaria Classic', meta:'130 τ.μ. · Διαμέρισμα · 3 Δωμάτια', price:'€330.000', cat:'kalamaria completed', bg:'pb2' },
+];
+
+const PROPERTIES = [
+  { area:'Θέρμη', type:'Maisonette', badge:'Θέρμη · Άμεσα Διαθέσιμο', title:'Residence Thermi Grand — Unit A', desc:'Πολυτελής maisonette 4 δωματίων στη Θέρμη. Υπόγειο+1ος+2ος όροφος. Ηλιακός, αποθήκη, 2 θέσεις parking.', sqm:245, rooms:4, floor:'Υπόγ.+1ος+2ος', price:'€500.000', pricePerSqm:'€2.041/τ.μ.' },
+  { area:'Θέρμη', type:'Apartment', badge:'Θέρμη · Άμεσα Διαθέσιμο', title:'Sky Loft Thermi — 7ος Όροφος', desc:'Μοναδικό διαμέρισμα 3 δωματίων στον 7ο όροφο με πανοραμική θέα. Loft αισθητική, ανοιχτόχωρο σαλόνι.', sqm:120, rooms:3, floor:'7ος', price:'€420.000', pricePerSqm:'€3.500/τ.μ.' },
+  { area:'Θέρμη', type:'Apartment', badge:'Θέρμη · Άμεσα Διαθέσιμο', title:'Thermi Prestige — 3ος Όροφος', desc:'Φωτεινό διαμέρισμα 4 δωματίων στον 3ο όροφο. Μεγάλα μπαλκόνια, ενεργειακή κλάση Α+, θέρμανση underfloor.', sqm:175, rooms:4, floor:'3ος', price:'€410.000', pricePerSqm:'€2.343/τ.μ.' },
+  { area:'Θέρμη', type:'Maisonette', badge:'Θέρμη · Άμεσα Διαθέσιμο', title:'Thermi Maisonette — 3ος & 4ος', desc:'Ευρύχωρη maisonette 3 δωματίων με αυτόνομη είσοδο. Μεγάλος εξωτερικός χώρος, αποθήκη.', sqm:154, rooms:3, floor:'3ος & 4ος', price:'€365.000', pricePerSqm:'€2.370/τ.μ.' },
+  { area:'Θέρμη', type:'Maisonette', badge:'Θέρμη · Τελευταίο Διαθέσιμο', title:'Thermi Maisonette — 1ος & 2ος', desc:'Τελευταία διαθέσιμη maisonette του συγκροτήματος. 3 δωμάτια, garden level, ιδιωτικός κήπος.', sqm:124, rooms:3, floor:'1ος & 2ος', price:'€295.000', pricePerSqm:'€2.379/τ.μ.' },
+  { area:'Καλαμαριά', type:'Apartment', badge:'Καλαμαριά · Άμεσα Διαθέσιμο', title:'Kalamaria Prestige — Κεντρικό', desc:'Διαμέρισμα 3 δωματίων σε κεντρικό σημείο της Καλαμαριάς. Πλήρης εξοπλισμός, κλιματισμός, 1 θέση parking.', sqm:175, rooms:3, floor:'2ος', price:'€430.000', pricePerSqm:'€2.457/τ.μ.' },
+  { area:'Καλαμαριά', type:'Apartment', badge:'Καλαμαριά · Νέα Προσθήκη', title:'Lysandrou Residence — Ανάληψη', desc:'Νεόδμητο 3αρι στην περιοχή Ανάληψης. Προνομιακή τοποθεσία, άριστη πρόσβαση στο κέντρο.', sqm:120, rooms:3, floor:'4ος', price:'€420.000', pricePerSqm:'€3.500/τ.μ.' },
+];
+
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+let currentLang = 'el';
+let currentPage = 'home';
+let currentT = 0;
+let tTimer;
+
+// ═══════════════════════════════════════════════════
+// LANGUAGE SYSTEM
+// ═══════════════════════════════════════════════════
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn, .mobile-lang button').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === lang || b.onclick && b.onclick.toString().includes(`'${lang}'`));
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    const map = {ΕΛ:'el',EN:'en',DE:'de',RU:'ru'};
+    b.classList.toggle('active', map[b.textContent] === lang);
+  });
+  applyTranslations();
+  buildMarquee();
+  buildTestimonials();
+  buildProjects();
+  buildProperties();
+  document.title = lang === 'el' ? 'Menexis Constructions | Θεσσαλονίκη' : 'Menexis Constructions | Thessaloniki';
+}
+
+function t(key) { return T[currentLang][key] || T['el'][key] || key; }
+
+function applyTranslations() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    const val = t(key);
+    if(val) el.innerHTML = val;
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// PAGE ROUTING
+// ═══════════════════════════════════════════════════
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if(target) {
+    target.classList.add('active');
+    currentPage = page;
+    window.scrollTo({top:0, behavior:'smooth'});
+    initReveal();
+    applyTranslations();
+    buildProjects();
+    buildProperties();
+    // Set all logos on the newly shown page
+    target.querySelectorAll('img[id*="logo"], img[id*="Logo"]').forEach(img => { img.src = LOGO_SRC; });
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// MARQUEE
+// ═══════════════════════════════════════════════════
+function buildMarquee() {
+  const areas = T[currentLang].marquee_areas || T.el.marquee_areas;
+  const track = document.getElementById('mq-track');
+  if(!track) return;
+  const items = [...areas,...areas].map(a=>`<div class="mq-item">${a} <div class="mq-dia"></div></div>`).join('');
+  track.innerHTML = items;
+}
+
+// ═══════════════════════════════════════════════════
+// TESTIMONIALS — FIXED HEIGHT
+// ═══════════════════════════════════════════════════
+function buildTestimonials() {
+  const data = TESTIMONIALS[currentLang] || TESTIMONIALS.el;
+  const block = document.getElementById('tblock');
+  const dotsEl = document.getElementById('tdots');
+  if(!block) return;
+  block.innerHTML = data.map((td,i) => `
+    <div class="t-slide ${i===0?'active':''}">
+      <div class="t-stars">${'★'.repeat(td.stars)}</div>
+      <p class="t-q">${td.q}</p>
+      <div class="t-a">${td.a}</div>
+    </div>
+  `).join('');
+  if(dotsEl) dotsEl.innerHTML = data.map((_,i) => `<button class="tdot ${i===0?'on':''}" onclick="goT(${i})"></button>`).join('');
+  currentT = 0;
+  clearInterval(tTimer);
+  tTimer = setInterval(()=>moveT(1), 8000);
+}
+
+function goT(n) {
+  const slides = document.querySelectorAll('.t-slide');
+  const dots = document.querySelectorAll('.tdot');
+  slides[currentT].classList.remove('active');
+  dots[currentT]?.classList.remove('on');
+  currentT = (n + slides.length) % slides.length;
+  slides[currentT].classList.add('active');
+  dots[currentT]?.classList.add('on');
+}
+function moveT(dir) { goT(currentT + dir); }
+
+// ═══════════════════════════════════════════════════
+// PROJECTS PAGE
+// ═══════════════════════════════════════════════════
+function buildProjects() {
+  const list = document.getElementById('proj-list');
+  if(!list) return;
+  list.innerHTML = PROJECTS.map(p => `
+    <div class="pcard" data-cat="${p.cat}">
+      <div class="pcard-bg ${p.bg}"></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-info">
+        <div class="pcard-tag">${p.tag} · ${p.year}</div>
+        <div class="pcard-title">${p.title}</div>
+        <div class="pcard-meta">${p.meta}</div>
+        <div class="pcard-price">${p.price}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProj(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pcard').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat.includes(cat)) ? '' : 'none';
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// PROPERTIES PAGE
+// ═══════════════════════════════════════════════════
+function buildProperties() {
+  const list = document.getElementById('prop-list');
+  if(!list) return;
+  list.innerHTML = PROPERTIES.map(p => `
+    <div class="prop-card">
+      <div class="prop-img">
+        <svg viewBox="0 0 80 80" fill="none"><rect x="10" y="20" width="60" height="55" stroke="#3D3BAF" stroke-width="2"/><path d="M10 20L40 5L70 20" stroke="#3D3BAF" stroke-width="2" fill="none"/><rect x="30" y="45" width="20" height="30" stroke="#3D3BAF" stroke-width="1.5"/><rect x="15" y="30" width="15" height="12" stroke="#3D3BAF" stroke-width="1"/><rect x="50" y="30" width="15" height="12" stroke="#3D3BAF" stroke-width="1"/></svg>
+        <div style="position:absolute;top:1rem;left:1rem"><div class="pcard-tag">${p.badge}</div></div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-title">${p.title}</div>
+        <div class="prop-specs">
+          <div class="prop-spec"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="1" stroke="#3D3BAF" stroke-width="1.2"/></svg>${p.sqm} τ.μ.</div>
+          <div class="prop-spec"><svg viewBox="0 0 16 16" fill="none"><path d="M1 14v-3a3 3 0 013-3h8a3 3 0 013 3v3M8 8a3 3 0 100-6 3 3 0 000 6z" stroke="#3D3BAF" stroke-width="1.2"/></svg>${p.rooms} δωμ.</div>
+          <div class="prop-spec"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1" stroke="#3D3BAF" stroke-width="1.2"/><line x1="5" y1="5" x2="11" y2="5" stroke="#3D3BAF" stroke-width="1"/><line x1="5" y1="8" x2="11" y2="8" stroke="#3D3BAF" stroke-width="1"/></svg>${p.floor}</div>
+          <div class="prop-spec">${p.area}</div>
+        </div>
+        <p class="prop-desc">${p.desc}</p>
+      </div>
+      <div class="prop-price-col">
+        <div>
+          <div class="prop-price">${p.price}</div>
+          <div class="prop-sqm">${p.pricePerSqm}</div>
+        </div>
+        <a href="#" class="prop-cta" onclick="showPage('contact');return false" data-key="nav_contact">Επικοινωνία</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════
+// BACK TO TOP
+// ═══════════════════════════════════════════════════
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ═══════════════════════════════════════════════════
+// NAV SCROLL
+// ═══════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  // Back to top button
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    btn.classList.toggle('show', window.scrollY > 200);
+    btn.classList.toggle('blue', window.scrollY > 100);
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// HAMBURGER
+// ═══════════════════════════════════════════════════
+function toggleMenu() {
+  const m = document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════════════
+function initReveal() {
+  const els = document.querySelectorAll('.page.active .reveal:not(.vis)');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
+  }, {threshold:0.1});
+  els.forEach(el => obs.observe(el));
+}
+
+// ═══════════════════════════════════════════════════
+// FORM
+// ═══════════════════════════════════════════════════
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  const messageDiv = document.getElementById('form-message');
+
+  if (!messageDiv) return; // Safety check
+
+  // Validation
+  if (!name) {
+    messageDiv.textContent = currentLang === 'el' ? 'Παρακαλώ εισάγετε το όνομά σας.' : currentLang === 'de' ? 'Bitte geben Sie Ihren Namen ein.' : currentLang === 'ru' ? 'Пожалуйста, введите ваше имя.' : 'Please enter your name.';
+    messageDiv.style.color = 'red';
+    return;
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    messageDiv.textContent = currentLang === 'el' ? 'Παρακαλώ εισάγετε έγκυρο email.' : currentLang === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' : currentLang === 'ru' ? 'Пожалуйста, введите действительный адрес электронной почты.' : 'Please enter a valid email.';
+    messageDiv.style.color = 'red';
+    return;
+  }
+  if (!msg) {
+    messageDiv.textContent = currentLang === 'el' ? 'Παρακαλώ εισάγετε το μήνυμά σας.' : currentLang === 'de' ? 'Bitte geben Sie Ihre Nachricht ein.' : currentLang === 'ru' ? 'Пожалуйста, введите ваше сообщение.' : 'Please enter your message.';
+    messageDiv.style.color = 'red';
+    return;
+  }
+
+  // Success
+  const btn = document.getElementById('fsub') || event.target;
+  if (!btn) return; // Safety check
+  const orig = btn.textContent;
+  btn.textContent = '✓ ' + (currentLang==='el'?'Εστάλη!':currentLang==='de'?'Gesendet!':currentLang==='ru'?'Отправлено!':'Sent!');
+  btn.style.background = 'var(--indigo-lt)';
+  messageDiv.textContent = currentLang === 'el' ? 'Ευχαριστούμε! Θα επικοινωνήσουμε σύντομα.' : currentLang === 'de' ? 'Vielen Dank! Wir werden uns bald bei Ihnen melden.' : currentLang === 'ru' ? 'Спасибо! Мы свяжемся с вами в ближайшее время.' : 'Thank you! We will contact you soon.';
+  messageDiv.style.color = 'green';
+  // Clear form
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-msg').value = '';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background=''; messageDiv.textContent='';}, 5000);
+}
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Embed logos
+  ['nav-logo-img','about-logo','footer-logo','footer-logo-about','footer-logo-proj','footer-logo-props','footer-logo-contact'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.src = LOGO_SRC;
+  });
+  // Start
+  setLang('el');
+  showPage('home');
+  buildMarquee();
+  buildTestimonials();
+  buildProjects();
+  buildProperties();
+  initReveal();
+});
+</script>
+
+<button id="back-to-top" class="back-to-top-btn" onclick="scrollToTop()">↑</button>
+
+</body>
+</html>
+
