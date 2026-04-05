@@ -80,9 +80,9 @@ h1 em{font-style:italic;color:var(--accent)}
 .btn-g::after{content:'→';transition:transform .2s}
 .btn-g:hover{color:#fff}
 .btn-g:hover::after{transform:translateX(4px)}
-.hero-stats{position:absolute;bottom:0;left:clamp(1rem,4vw,4rem);right:auto;z-index:2;display:flex;border-top:1px solid rgba(255,255,255,.06)}
-.hstat{text-align:center;padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.2vw,2.2rem);border-left:1px solid rgba(255,255,255,.07)}
-.hstat:last-child{border-right:1px solid rgba(255,255,255,.07)}
+.hero-stats{position:absolute;top:52%;right:clamp(1rem,4vw,4rem);left:auto;bottom:auto;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;border-top:none}
+.hstat{text-align:center;padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.2vw,2.2rem);border-left:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
 .hstat-n{font-family:var(--serif);font-size:clamp(2.1rem,3.2vw,3.3rem);font-weight:300;color:#fff;line-height:1}
 .hstat-n sup{font-size:60%;color:var(--accent);vertical-align:super}
 .hstat-l{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.36);margin-top:.45rem}
@@ -322,7 +322,7 @@ footer{background:var(--navy-deep);padding:clamp(0.5rem,1vw,1rem) clamp(0.5rem,1
   .nav-links{display:none}
   .hamburger{display:flex}
   h1{font-size:clamp(2rem,7vw,3rem)}
-  .hero-stats{position:relative;right:auto;bottom:auto;margin-top:2rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1)}
+  .hero-stats{position:relative;top:auto;right:auto;left:auto;bottom:auto;transform:none;margin-top:2rem;flex-direction:row;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1)}
   #hero{padding-bottom:2rem}
   .hero-content{padding:0 1rem}
   .pg{grid-template-columns:1fr;grid-template-rows:auto}
