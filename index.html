@@ -554,10 +554,10 @@ const LOGO = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/7QCcUGhvdG9zaG9
   <div class="sec-eye reveal" style="justify-content:center" data-key="areas_eye"></div>
   <h2 class="reveal rd1" data-key="areas_h2"></h2>
   <div class="ag">
-    <div class="ac reveal rd1"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="15" stroke="#3D3BAF" stroke-width="1.5"/><path d="M3 7L12 2L21 7" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an">Καλαμαριά</div><div class="ad" data-key="area1_d"></div></div>
-    <div class="ac reveal rd2"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="11" width="10" height="11" stroke="#3D3BAF" stroke-width="1.5"/><rect x="12" y="6" width="10" height="16" stroke="#3D3BAF" stroke-width="1.5"/><line x1="1" y1="22" x2="23" y2="22" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="an">Θέρμη</div><div class="ad" data-key="area2_d"></div></div>
-    <div class="ac reveal rd3"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="18" stroke="#3D3BAF" stroke-width="1.5"/><rect x="7" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="7" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/></svg></div><div class="an">Ωραιόκαστρο</div><div class="ad" data-key="area3_d"></div></div>
-    <div class="ac reveal rd4"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M3 22L3 9L12 3L21 9L21 22" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an">Εύοσμος</div><div class="ad" data-key="area4_d"></div></div>
+    <div class="ac reveal rd1"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="15" stroke="#3D3BAF" stroke-width="1.5"/><path d="M3 7L12 2L21 7" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an" data-key="area1_n"></div><div class="ad" data-key="area1_d"></div></div>
+    <div class="ac reveal rd2"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="11" width="10" height="11" stroke="#3D3BAF" stroke-width="1.5"/><rect x="12" y="6" width="10" height="16" stroke="#3D3BAF" stroke-width="1.5"/><line x1="1" y1="22" x2="23" y2="22" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="an" data-key="area2_n"></div><div class="ad" data-key="area2_d"></div></div>
+    <div class="ac reveal rd3"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="18" stroke="#3D3BAF" stroke-width="1.5"/><rect x="7" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="8" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="7" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/><rect x="13" y="15" width="4" height="4" stroke="#3D3BAF" stroke-width="1"/></svg></div><div class="an" data-key="area3_n"></div><div class="ad" data-key="area3_d"></div></div>
+    <div class="ac reveal rd4"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M3 22L3 9L12 3L21 9L21 22" stroke="#3D3BAF" stroke-width="1.5"/><rect x="9" y="14" width="6" height="8" stroke="#3D3BAF" stroke-width="1.2"/></svg></div><div class="an" data-key="area4_n"></div><div class="ad" data-key="area4_d"></div></div>
     <div class="ac reveal rd4"><div class="ai-wrap"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="#3D3BAF" stroke-width="1.5"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="#3D3BAF" stroke-width="1.5"/></svg></div><div class="an" data-key="area5_n"></div><div class="ad" data-key="area5_d"></div></div>
   </div>
 </section>
@@ -813,7 +813,7 @@ const LOGO = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/7QCcUGhvdG9zaG9
 // ═══════════════════════════════════════════════════
 // LOGO — EMBEDDED, NEVER BREAKS
 // ═══════════════════════════════════════════════════
-const LOGO_SRC = './img/menexis.jpg';
+const LOGO_SRC = './img/image.png';
 document.querySelectorAll('img[id*="logo"], img[id*="Logo"]').forEach(img => { img.src = LOGO_SRC; });
 // also set by id specifically
 ['nav-logo-img','about-logo','footer-logo','footer-logo-about','footer-logo-proj','footer-logo-props','footer-logo-contact'].forEach(id=>{
@@ -852,6 +852,7 @@ const T = {
     s3_t:'Κατασκευή', s3_d:'Εκτέλεση με τα υψηλότερα πρότυπα ποιότητας και πιστή τήρηση χρονοδιαγραμμάτων.',
     s4_t:'Παράδοση', s4_d:'Παράδοση με πλήρη τεκμηρίωση, εγγυήσεις και after-sales υποστήριξη.',
     areas_eye:'Κάλυψη', areas_h2:'Περιοχές <em>Δραστηριότητας</em>',
+    area1_n:'Καλαμαριά', area2_n:'Θέρμη', area3_n:'Ωραιόκαστρο', area4_n:'Εύοσμος',
     area1_d:'Κύρια έδρα δραστηριότητας', area2_d:'Νέα πολυτελή έργα', area3_d:'Βορειοδυτική Θεσ/νίκη', area4_d:'Δυτική Θεσσαλονίκη',
     area5_n:'Κεντρική Θεσ/νίκη', area5_d:'Αστικά premium έργα',
     test_eye:'Τι Λένε οι Πελάτες μας', test_h2:'<em>Εμπιστοσύνη</em> που Αποδεικνύεται',
@@ -909,6 +910,7 @@ const T = {
     s3_t:'Construction', s3_d:'Execution to the highest quality standards, strictly on schedule.',
     s4_t:'Delivery', s4_d:'Handover with full documentation, warranties and after-sales support.',
     areas_eye:'Coverage', areas_h2:'Areas of <em>Activity</em>',
+    area1_n:'Kalamaria', area2_n:'Thermi', area3_n:'Oreokastro', area4_n:'Evosmos',
     area1_d:'Main area of activity', area2_d:'New luxury developments', area3_d:'Northwest Thessaloniki', area4_d:'West Thessaloniki',
     area5_n:'Central Thessaloniki', area5_d:'Premium urban projects',
     test_eye:'What Our Clients Say', test_h2:'<em>Trust</em> Proven Over Time',
@@ -966,6 +968,7 @@ const T = {
     s3_t:'Bau', s3_d:'Ausführung nach höchsten Qualitätsstandards, strikt termingerecht.',
     s4_t:'Übergabe', s4_d:'Übergabe mit vollständiger Dokumentation, Garantien und After-Sales-Support.',
     areas_eye:'Abdeckung', areas_h2:'Tätigkeits-<em>bereiche</em>',
+    area1_n:'Kalamaria', area2_n:'Thermi', area3_n:'Oreokastro', area4_n:'Evosmos',
     area1_d:'Haupttätigkeitsbereich', area2_d:'Neue Luxusprojekte', area3_d:'Nordwestliches Thessaloniki', area4_d:'Westliches Thessaloniki',
     area5_n:'Zentrum Thessaloniki', area5_d:'Premium Stadtprojekte',
     test_eye:'Was unsere Kunden sagen', test_h2:'<em>Vertrauen</em> über Jahrzehnte bewiesen',
@@ -1023,6 +1026,7 @@ const T = {
     s3_t:'Строительство', s3_d:'Исполнение по высочайшим стандартам качества, строго в срок.',
     s4_t:'Сдача', s4_d:'Передача с полной документацией, гарантиями и послепродажной поддержкой.',
     areas_eye:'Охват', areas_h2:'Районы <em>деятельности</em>',
+    area1_n:'Каламария', area2_n:'Терми', area3_n:'Ореокастро', area4_n:'Эвосмос',
     area1_d:'Основной район деятельности', area2_d:'Новые элитные объекты', area3_d:'Северо-западные Салоники', area4_d:'Западные Салоники',
     area5_n:'Центр Салоников', area5_d:'Премиальные городские проекты',
     test_eye:'Что говорят наши клиенты', test_h2:'<em>Доверие</em>, проверенное временем',
