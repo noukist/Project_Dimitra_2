@@ -297,6 +297,7 @@ footer{background:var(--navy-deep);padding:clamp(0.5rem,1vw,1rem) clamp(0.5rem,1
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
+  .hero-stats{position:relative;top:auto;right:auto;left:auto;bottom:auto;transform:none;margin-top:2rem;justify-content:flex-start;flex-wrap:wrap}
   #about-section{grid-template-columns:1fr}
   .about-vis{min-height:240px}
   #contact-section{grid-template-columns:1fr}
@@ -318,6 +319,11 @@ footer{background:var(--navy-deep);padding:clamp(0.5rem,1vw,1rem) clamp(0.5rem,1
   .ps{text-align:left}
   .values-grid{grid-template-columns:1fr}
   .proj-list{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:1200px){
+  #hero{padding-bottom:2rem}
+  .hero-content{max-width:100%;padding-right:clamp(1rem,4vw,4rem)}
+  .hero-stats{position:relative;top:auto;right:auto;left:auto;bottom:auto;transform:none;margin-top:2rem;justify-content:flex-start;flex-wrap:wrap}
 }
 @media(max-width:768px){
   .nav-logo img{height:65px}
